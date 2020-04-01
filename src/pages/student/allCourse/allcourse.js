@@ -19,6 +19,7 @@ export default class allCourse extends React.Component {
     }
 
     render() {
+
         return (
             <div>
                 <Carousel autoplay>
