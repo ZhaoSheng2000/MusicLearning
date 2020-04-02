@@ -1,5 +1,5 @@
 import React from 'react'
-import {Layout, Menu} from 'antd';
+import {Layout, Menu,Input} from 'antd';
 import {Route, Switch} from "react-router-dom";
 import './index.less'
 import {
@@ -13,9 +13,12 @@ import {
 
 import Home from '../home/home'
 import AllCourse from '../allCourse/allcourse'
+import TeacherList from '../teacherList/teacherlist'
+import TeacherDetail from "../teacherList/teacherDetail";
 
 const {Header, Content, Footer} = Layout;
 const {SubMenu} = Menu;
+const { Search } = Input;
 
 
 export default class index extends React.Component {
@@ -25,11 +28,6 @@ export default class index extends React.Component {
 
     };
 
-    toggle = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        });
-    };
 
     render() {
         return (
@@ -44,8 +42,17 @@ export default class index extends React.Component {
                         >
                             <Menu.Item key="0"><a href={'/#/'}><HomeOutlined/>首页</a></Menu.Item>
                             <Menu.Item key="1"> <a href={'/#/allcourse'}><BookOutlined />课程</a></Menu.Item>
-                            <Menu.Item key="2"> <TeamOutlined />教师风采</Menu.Item>
+                            <Menu.Item key="2"> <a href={'/#/teacher'}><TeamOutlined />老师</a></Menu.Item>
                             <Menu.Item key="3"> <BulbOutlined />精彩讨论</Menu.Item>
+                            <SubMenu
+                                title={
+                                <Search
+                                    style={{paddingTop:15,paddingLeft:30}}
+                                    placeholder="搜索课程或老师"
+                                    enterButton="搜索"
+                                    onSearch={value => console.log(value)}
+                                />
+                            }/>
                             <SubMenu title="我的" className="geren">
                                 <Menu.Item> <UserOutlined/>我的资料</Menu.Item>
                                 <Menu.Item><LogoutOutlined/>退出登录</Menu.Item>
@@ -56,6 +63,8 @@ export default class index extends React.Component {
                     <Content className='mycontent'>
                             <Switch>
                                 <Route path={'/allcourse'} component={AllCourse}/>
+                                <Route path={'/teacher'} component={TeacherList}/>
+                                <Route path={'/teacherDetail'} component={TeacherDetail}/>
                                 <Route  component={Home}/>
                             </Switch>
                     </Content>

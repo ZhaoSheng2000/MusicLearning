@@ -101,7 +101,7 @@ export default class Home extends React.Component {
                 <div className='discuss'>
                     <Row gutter={16}>
                         <Col span={8}>
-                            <img alt='img' src='https://s1.ax1x.com/2020/03/30/GnmivQ.png' className='myimg'/>
+                            <img alt='img' src='https://s1.ax1x.com/2020/04/01/G1Lm9A.png' className='myimg'/>
                             <h2 className='mystudy'>一起学习，一起成长</h2>
                             <h4 className='mystudy'>已有1000万学生在此发言讨论</h4>
                         </Col>
