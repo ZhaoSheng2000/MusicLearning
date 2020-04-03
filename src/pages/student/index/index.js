@@ -11,10 +11,13 @@ import {
     TeamOutlined
 } from '@ant-design/icons';
 
-import Home from '../home/home'
-import AllCourse from '../allCourse/allcourse'
-import TeacherList from '../teacherList/teacherlist'
+import Home from '../home/home';
+import AllCourse from '../allCourse/allcourse';
+import TeacherList from '../teacherList/teacherlist';
 import TeacherDetail from "../teacherList/teacherDetail";
+import CourseDetail from "../courseDetail/courseDetail";
+import InformationDetail from "../informationDetail/informationDetail";
+import Discuss from "../discuss/discuss";
 
 const {Header, Content, Footer} = Layout;
 const {SubMenu} = Menu;
@@ -43,7 +46,7 @@ export default class index extends React.Component {
                             <Menu.Item key="0"><a href={'/#/'}><HomeOutlined/>首页</a></Menu.Item>
                             <Menu.Item key="1"> <a href={'/#/allcourse'}><BookOutlined />课程</a></Menu.Item>
                             <Menu.Item key="2"> <a href={'/#/teacher'}><TeamOutlined />老师</a></Menu.Item>
-                            <Menu.Item key="3"> <BulbOutlined />精彩讨论</Menu.Item>
+                            <Menu.Item key="3"> <a href={'/#/discuss'}><BulbOutlined />精彩讨论</a></Menu.Item>
                             <SubMenu
                                 title={
                                 <Search
@@ -65,6 +68,9 @@ export default class index extends React.Component {
                                 <Route path={'/allcourse'} component={AllCourse}/>
                                 <Route path={'/teacher'} component={TeacherList}/>
                                 <Route path={'/teacherDetail'} component={TeacherDetail}/>
+                                <Route path={'/courseDetail'} component={CourseDetail}/>
+                                <Route path={'/information'} component={InformationDetail}/>
+                                <Route path={'/discuss'} component={Discuss}/>
                                 <Route  component={Home}/>
                             </Switch>
                     </Content>

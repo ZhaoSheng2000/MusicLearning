@@ -17,6 +17,9 @@ export default class allCourse extends React.Component {
     onChange = (pageNumber)=> {
         console.log('Page: ', pageNumber);
     }
+    onCourseDetail=()=>{
+        this.props.history.push('/courseDetail')
+    }
 
     render() {
         return (
@@ -45,6 +48,7 @@ export default class allCourse extends React.Component {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
+                                        onClick={this.onCourseDetail}
                                         hoverable
                                         cover={<img alt="example" src="https://s1.ax1x.com/2020/03/30/GmzF8x.jpg"/>}
                                     >
@@ -76,7 +80,7 @@ export default class allCourse extends React.Component {
                     }
                 </Row>
                 <div style={{textAlign:"center"}}>
-                    <Pagination showQuickJumper defaultPageSize={24} defaultCurrent={1} total={500} onChange={this.onChange}/>
+                    <Pagination  defaultPageSize={24} defaultCurrent={1} total={500} onChange={this.onChange}/>
                 </div>
                 <BackTop/>
             </div>
