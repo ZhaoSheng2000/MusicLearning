@@ -18,6 +18,7 @@ import TeacherDetail from "../teacherList/teacherDetail";
 import CourseDetail from "../courseDetail/courseDetail";
 import InformationDetail from "../informationDetail/informationDetail";
 import Discuss from "../discuss/discuss";
+import DiscussDetail from "../discussDetail/discussDetail";
 
 const {Header, Content, Footer} = Layout;
 const {SubMenu} = Menu;
@@ -71,6 +72,7 @@ export default class index extends React.Component {
                                 <Route path={'/courseDetail'} component={CourseDetail}/>
                                 <Route path={'/information'} component={InformationDetail}/>
                                 <Route path={'/discuss'} component={Discuss}/>
+                                <Route path={'/discussDetail'} component={DiscussDetail}/>
                                 <Route  component={Home}/>
                             </Switch>
                     </Content>

@@ -12,7 +12,11 @@ export default class Discuss extends React.Component {
 
     onChange = (pageNumber)=> {
         console.log('Page: ', pageNumber);
-    }
+    };
+
+    onDetail=()=>{
+      this.props.history.push('/discussDetail')
+    };
 
     render() {
         return (
@@ -23,7 +27,7 @@ export default class Discuss extends React.Component {
                         {
                             this.state.discuss.map((name, index) => {
                                 return (
-                                    <Card hoverable>
+                                    <Card hoverable onClick={this.onDetail}>
                                         <Row gutter={16}>
                                             <Col span={8}>
                                                 <img alt='course' src="https://s1.ax1x.com/2020/03/31/GMW6IS.jpg"/>
