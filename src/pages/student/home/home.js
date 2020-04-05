@@ -21,6 +21,9 @@ export default class Home extends React.Component {
     onInformationDetail=()=>{
         this.props.history.push('/information')
     }
+    onQuestion=()=>{
+        this.props.history.push('/discussDetail')
+    }
 
     render() {
         return (
@@ -116,7 +119,7 @@ export default class Home extends React.Component {
                         </Col>
                         <Col span={8}>
                             <div className='discussCard'>
-                                <Card title="XX老师 XX课程" hoverable style={{height: 200}}>
+                                <Card title="XX老师 XX课程" hoverable style={{height: 200}} onClick={this.onQuestion}>
                                     <Title level={4}>问题问。。。。。。。。。？</Title>
                                     <p style={{position: "absolute", bottom: 0}}>已有234人参与讨论</p>
                                 </Card>
@@ -124,7 +127,7 @@ export default class Home extends React.Component {
                         </Col>
                         <Col span={8}>
                             <div className='discussCard'>
-                                <Card title="XX老师 XX课程" hoverable  style={{height: 200}}>
+                                <Card title="XX老师 XX课程" hoverable  style={{height: 200}}  onClick={this.onQuestion}>
                                     <Title level={4}>问题。。。。。。。。。？</Title>
                                     <p style={{position: "absolute", bottom: 0}}>已有234人参与讨论</p>
                                 </Card>

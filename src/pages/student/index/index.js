@@ -19,6 +19,7 @@ import CourseDetail from "../courseDetail/courseDetail";
 import InformationDetail from "../informationDetail/informationDetail";
 import Discuss from "../discuss/discuss";
 import DiscussDetail from "../discussDetail/discussDetail";
+import Personal from "../personal/personal";
 
 const {Header, Content, Footer} = Layout;
 const {SubMenu} = Menu;
@@ -61,7 +62,7 @@ export default class index extends React.Component {
                                 <Menu.Item> <UserOutlined/>我的资料</Menu.Item>
                                 <Menu.Item><LogoutOutlined/>退出登录</Menu.Item>
                             </SubMenu>
-                            <Menu.Item key="4" className="geren">个人中心</Menu.Item>
+                            <Menu.Item key="4" className="geren"><a href={'/#/personal'}>个人中心</a></Menu.Item>
                         </Menu>
                     </Header>
                     <Content className='mycontent'>
@@ -73,6 +74,7 @@ export default class index extends React.Component {
                                 <Route path={'/information'} component={InformationDetail}/>
                                 <Route path={'/discuss'} component={Discuss}/>
                                 <Route path={'/discussDetail'} component={DiscussDetail}/>
+                                <Route path={'/personal'} component={Personal}/>
                                 <Route  component={Home}/>
                             </Switch>
                     </Content>
