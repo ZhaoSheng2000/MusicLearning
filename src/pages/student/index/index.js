@@ -20,6 +20,8 @@ import InformationDetail from "../informationDetail/informationDetail";
 import Discuss from "../discuss/discuss";
 import DiscussDetail from "../discussDetail/discussDetail";
 import Personal from "../personal/personal";
+import UserInfo from "../userInfo/userInfo";
+import AddCourse from "../../addCourse/addCourse";
 
 const {Header, Content, Footer} = Layout;
 const {SubMenu} = Menu;
@@ -59,7 +61,7 @@ export default class index extends React.Component {
                                 />
                             }/>
                             <SubMenu title="我的" className="geren">
-                                <Menu.Item> <UserOutlined/>我的资料</Menu.Item>
+                                <Menu.Item> <a href={'/#/user'}><UserOutlined/>我的资料</a> </Menu.Item>
                                 <Menu.Item><LogoutOutlined/>退出登录</Menu.Item>
                             </SubMenu>
                             <Menu.Item key="4" className="geren"><a href={'/#/personal'}>个人中心</a></Menu.Item>
@@ -75,6 +77,8 @@ export default class index extends React.Component {
                                 <Route path={'/discuss'} component={Discuss}/>
                                 <Route path={'/discussDetail'} component={DiscussDetail}/>
                                 <Route path={'/personal'} component={Personal}/>
+                                <Route path={'/user'} component={UserInfo}/>
+                                <Route path={'/addCourse'} component={AddCourse}/>
                                 <Route  component={Home}/>
                             </Switch>
                     </Content>
