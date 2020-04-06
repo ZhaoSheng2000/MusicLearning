@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col, Row, Typography, Breadcrumb, Button, Tabs, Card, Avatar,Comment,Tooltip,List} from "antd";
+import {Col, Row, Typography, Breadcrumb, Button, Tabs, Card, Avatar,Comment,Tooltip,List,Modal,TimePicker} from "antd";
 
 import moment from 'moment';
 
@@ -10,6 +10,7 @@ import {
 
 const {Title, Text,Paragraph} = Typography;
 const {TabPane} = Tabs;
+const { RangePicker } = TimePicker;
 
 const data = [
     {
@@ -66,13 +67,34 @@ const data = [
 
 export default class CourseDetail extends React.Component {
 
-    state = {};
-
-    onTeacherDetail=()=>{
-        this.props.history.push('')
-    }
+    state = {
+        visible: false,
+        value:[],
+    };
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+    handleOk = e => {
+        this.setState({
+            visible: false,
+        });
+    };
+    handleCancel = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+    onChange = time => {
+        console.log(time);
+        this.setState({value:time})
+    };
+    //function(dates: [moment, moment], dateStrings: [string, string])
 
     render() {
+        const format = 'HH:mm';
         return (
             <div>
                 <div style={{paddingLeft: 30, backgroundColor: "white", height: 400}}>
@@ -98,7 +120,18 @@ export default class CourseDetail extends React.Component {
                             <Text type="warning">已有234人参加</Text>
                             <br/>
                             <br/>
-                            <Button type="primary" size={"large"}>立即参加</Button>
+                            <Button type="primary" size={"large"} onClick={this.showModal}>立即参加</Button>
+                            <Modal
+                                title="选择上课时间"
+                                visible={this.state.visible}
+                                onOk={this.handleOk}
+                                onCancel={this.handleCancel}
+                            >
+                                <div>
+                                    <RangePicker value={this.state.value} format={format} minuteStep={10} onChange={this.onChange}>
+                                    </RangePicker>
+                                </div>
+                            </Modal>
                         </Col>
                     </Row>
                 </div>
