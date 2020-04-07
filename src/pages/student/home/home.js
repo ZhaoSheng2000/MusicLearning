@@ -226,7 +226,7 @@ export default class Home extends React.Component {
 
                 <div className='footerimg'>
                     <Title level={2}
-                           style={{color: "white", textAlign: "center", padding: 50}}>即便错过心仪的大学，也不要错过中国大学MOOC！</Title>
+                           style={{color: "white", textAlign: "center", padding: 50}}>自由的学习氛围，时刻为你准备！</Title>
                     <Row gutter={32}>
                         <Col span={8}>
                             <div style={{textAlign: "center"}}>
@@ -234,7 +234,7 @@ export default class Home extends React.Component {
                                 <div>
                                     <h2 className='mystudy'>xxx学生</h2>
                                     <p className='footercomment'>
-                                        我第一次感受到故宫角楼在夕阳下震撼的美，便是在考完《中国古代建筑艺术》之后的那个下午；学完了《不朽的艺术》，再去博物馆不再是陪儿子完成任务了。学习MOOC之前和之后的对比，让我感受最深的就是鲍勃·迪伦的那句“昔日我曾苍老，如今风华正茂”
+                                        我第一次感受到故宫角楼在夕阳下震撼的美，便是在考完《中国古代建筑艺术》之后的那个下午；学完了《不朽的艺术》，再去博物馆不再是陪儿子完成任务了。让我感受最深的就是鲍勃·迪伦的那句“昔日我曾苍老，如今风华正茂”
                                         。
                                     </p>
                                 </div>
@@ -246,7 +246,7 @@ export default class Home extends React.Component {
                                 <div>
                                     <h2 className='mystudy'>xxx学生</h2>
                                     <p className='footercomment'>
-                                        我第一次感受到故宫角楼在夕阳下震撼的美，便是在考完《中国古代建筑艺术》之后的那个下午；学完了《不朽的艺术》，再去博物馆不再是陪儿子完成任务了。学习MOOC之前和之后的对比，让我感受最深的就是鲍勃·迪伦的那句“昔日我曾苍老，如今风华正茂”
+                                        我第一次感受到故宫角楼在夕阳下震撼的美，便是在考完《中国古代建筑艺术》之后的那个下午；学完了《不朽的艺术》，再去博物馆不再是陪儿子完成任务了。让我感受最深的就是鲍勃·迪伦的那句“昔日我曾苍老，如今风华正茂”
                                         。
                                     </p>
                                 </div>
@@ -258,7 +258,7 @@ export default class Home extends React.Component {
                                 <div>
                                     <h2 className='mystudy'>xxx学生</h2>
                                     <p className='footercomment'>
-                                        我第一次感受到故宫角楼在夕阳下震撼的美，便是在考完《中国古代建筑艺术》之后的那个下午；学完了《不朽的艺术》，再去博物馆不再是陪儿子完成任务了。学习MOOC之前和之后的对比，让我感受最深的就是鲍勃·迪伦的那句“昔日我曾苍老，如今风华正茂”
+                                        我第一次感受到故宫角楼在夕阳下震撼的美，便是在考完《中国古代建筑艺术》之后的那个下午；学完了《不朽的艺术》，再去博物馆不再是陪儿子完成任务了。让我感受最深的就是鲍勃·迪伦的那句“昔日我曾苍老，如今风华正茂”
                                         。
                                     </p>
                                 </div>
