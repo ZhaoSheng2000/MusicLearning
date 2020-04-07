@@ -1,31 +1,38 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Carousel, Row, Col, Card, Avatar, Button, Typography, BackTop} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 
+import {receiveNew} from "../redux/actions";
 import './home.less'
 
 const {Title} = Typography;
 const {Meta} = Card;
 
-
-export default class Home extends React.Component {
-
+class Home extends React.Component {
     state = {
-        tuijian:[1,2,3,4],
-        yinyue: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        tuijian: [1, 2, 3, 4],
+        yinyue: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     };
 
-    onCourseDetail=()=>{
+    componentDidMount() {
+        this.props.receiveNew();
+
+    }
+
+    onCourseDetail = () => {
         this.props.history.push('/courseDetail')
     };
-    onInformationDetail=()=>{
+    onInformationDetail = () => {
         this.props.history.push('/information')
     }
-    onQuestion=()=>{
+    onQuestion = () => {
         this.props.history.push('/discussDetail')
     }
 
     render() {
+        const {news} = this.props
+        console.log(news)
         return (
             <div>
                 <Row gutter={12}>
@@ -55,7 +62,7 @@ export default class Home extends React.Component {
                                 <p>XXXX课程</p>
                                 <p>XXXX课程</p>
                                 <div className="myBotton">
-                                    <Button type="primary" block>
+                                    <Button type="primary" block onClick={this.onLogin}>
                                         我的课程
                                     </Button>
                                 </div>
@@ -69,8 +76,8 @@ export default class Home extends React.Component {
                 </div>
                 <Row gutter={16}>
                     {
-                        this.state.tuijian.map((name,index)=>{
-                            return(
+                        this.state.tuijian.map((name, index) => {
+                            return (
                                 <Col span={6} key={index}>
                                     <Card
                                         onClick={this.onInformationDetail}
@@ -90,8 +97,8 @@ export default class Home extends React.Component {
                 </div>
                 <Row gutter={16}>
                     {
-                        this.state.tuijian.map((name,index)=>{
-                            return(
+                        this.state.tuijian.map((name, index) => {
+                            return (
                                 <Col span={6} key={index}>
                                     <Card
                                         onClick={this.onCourseDetail}
@@ -127,7 +134,7 @@ export default class Home extends React.Component {
                         </Col>
                         <Col span={8}>
                             <div className='discussCard'>
-                                <Card title="XX老师 XX课程" hoverable  style={{height: 200}}  onClick={this.onQuestion}>
+                                <Card title="XX老师 XX课程" hoverable style={{height: 200}} onClick={this.onQuestion}>
                                     <Title level={4}>问题。。。。。。。。。？</Title>
                                     <p style={{position: "absolute", bottom: 0}}>已有234人参与讨论</p>
                                 </Card>
@@ -273,3 +280,14 @@ export default class Home extends React.Component {
         )
     }
 }
+
+// export default connect({userLogin})(Home)
+
+
+export default connect(
+    reducer => ({news:reducer.news}),
+    {receiveNew}
+)(Home);
+
+
+

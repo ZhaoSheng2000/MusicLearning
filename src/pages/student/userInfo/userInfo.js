@@ -24,7 +24,6 @@ export default class UserInfo extends React.Component {
         previewVisible: false,
         previewImage: '',
         fileList: []
-
     };
 
     handleCancel = () => this.setState({previewVisible: false});
@@ -124,6 +123,13 @@ export default class UserInfo extends React.Component {
                                         >
                                             <Input type="number" style={{width: 300}}/>
                                         </Form.Item>
+                                        <Form.Item
+                                            label="邮箱"
+                                            name="email"
+                                            rules={[{required: true, type:'email', message: '请输入正确的邮箱!'}]}
+                                        >
+                                            <Input  style={{width: 300}}/>
+                                        </Form.Item>
                                         <Form.Item {...tailLayout}>
                                             <Button type="primary" htmlType="submit">
                                                 保存
@@ -131,10 +137,8 @@ export default class UserInfo extends React.Component {
                                         </Form.Item>
                                     </Form>
                                 </div>
-
                             </Card>
                         </div>
-
                     </Col>
                 </Row>
             </div>
