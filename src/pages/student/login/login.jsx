@@ -8,6 +8,13 @@ export default class Login extends React.Component {
     };
     onFinish =(e)=>{
         console.log(e)
+        if (e.identity===1){
+            this.props.history.push('/');
+        } else if (e.identity===2){
+            this.props.history.push('/teacherPage')
+        }else {
+            this.props.history.push('/admin')
+        }
     };
 
     render() {
@@ -46,7 +53,7 @@ export default class Login extends React.Component {
                             />
                         </Form.Item>
                         <Form.Item
-                            name="identify"
+                            name="identity"
                             rules={[{ required: true, message: ' 请选择您的身份！' }]}
                         >
                             <Radio.Group value={this.state.identity}>
