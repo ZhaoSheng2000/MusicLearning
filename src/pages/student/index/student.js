@@ -21,6 +21,7 @@ import Discuss from "../discuss/discuss";
 import DiscussDetail from "../discussDetail/discussDetail";
 import Personal from "../personal/personal";
 import UserInfo from "../userInfo/userInfo";
+import Login from "../login/login";
 
 const {Header, Content, Footer} = Layout;
 const {SubMenu} = Menu;
@@ -77,6 +78,7 @@ export default class student extends React.Component {
                                 <Route path={'/discussDetail'} component={DiscussDetail}/>
                                 <Route path={'/personal'} component={Personal}/>
                                 <Route path={'/user'} component={UserInfo}/>
+                                <Route path={'/login'} component={Login} />
                                 <Route  component={Home}/>
                             </Switch>
                     </Content>
