@@ -1,7 +1,7 @@
 import React from 'react'
 import {Layout, Menu,Input} from 'antd';
 import {Route, Switch} from "react-router-dom";
-import './index.less'
+import './student.less'
 import {
     LogoutOutlined,
     UserOutlined,
@@ -27,7 +27,7 @@ const {SubMenu} = Menu;
 const { Search } = Input;
 
 
-export default class index extends React.Component {
+export default class student extends React.Component {
 
     state = {
         collapsed: false,

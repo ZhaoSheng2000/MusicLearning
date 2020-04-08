@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Carousel, Row, Col, Card, Typography, BackTop, Pagination} from 'antd';
 
 import './allcourse.less'
@@ -7,7 +8,7 @@ const {Title} = Typography;
 const {Meta} = Card;
 
 
-export default class allCourse extends React.Component {
+class allCourse extends React.Component {
 
     state = {
         course: [1, 2, 3, 4, 5, 6],
@@ -22,6 +23,7 @@ export default class allCourse extends React.Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <div>
                 <Carousel autoplay>
@@ -87,3 +89,6 @@ export default class allCourse extends React.Component {
         )
     }
 }
+export default connect(
+    state =>({news:state.news})
+)(allCourse)

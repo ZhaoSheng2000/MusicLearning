@@ -15,10 +15,10 @@ class Home extends React.Component {
         yinyue: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     };
 
-    componentDidMount() {
+    onNews=()=>{
         this.props.receiveNew();
 
-    }
+    };
 
     onCourseDetail = () => {
         this.props.history.push('/courseDetail')
@@ -31,8 +31,8 @@ class Home extends React.Component {
     }
 
     render() {
-        const {news} = this.props
-        console.log(news)
+        const {news} = this.props.news;
+            console.log(news);
         return (
             <div>
                 <Row gutter={12}>
@@ -62,7 +62,7 @@ class Home extends React.Component {
                                 <p>XXXX课程</p>
                                 <p>XXXX课程</p>
                                 <div className="myBotton">
-                                    <Button type="primary" block onClick={this.onLogin}>
+                                    <Button type="primary" block onClick={this.onNews}>
                                         我的课程
                                     </Button>
                                 </div>
@@ -76,7 +76,7 @@ class Home extends React.Component {
                 </div>
                 <Row gutter={16}>
                     {
-                        this.state.tuijian.map((name, index) => {
+                      news.length !== 0 ? news.map((name, index) => {
                             return (
                                 <Col span={6} key={index}>
                                     <Card
@@ -85,11 +85,11 @@ class Home extends React.Component {
                                         style={{width: 300}}
                                         cover={<img alt="example" src="https://s1.ax1x.com/2020/03/30/GmzF8x.jpg"/>}
                                     >
-                                        <Meta title={`资讯${name}`} description="简介简介。。。。。。。简介"/>
+                                        <Meta title={`资讯${name.title}`} description="简介简介。。。。。。。简介"/>
                                     </Card>
                                 </Col>
                             )
-                        })
+                        }) :null
                     }
                 </Row>
                 <div className='myTitle'>
@@ -281,11 +281,9 @@ class Home extends React.Component {
     }
 }
 
-// export default connect({userLogin})(Home)
-
 
 export default connect(
-    reducer => ({news:reducer.news}),
+    state => ({news:state.news}),
     {receiveNew}
 )(Home);
 
