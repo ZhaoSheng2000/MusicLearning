@@ -1,13 +1,18 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Form,  Input, Button, Card,Radio} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-export default class Login extends React.Component {
+import {userLogin,receiveNew} from "../redux/actions";
+
+class Login extends React.Component {
     state = {
         identity: 1
     };
     onFinish =(e)=>{
-        console.log(e)
+        console.log(e);
+        this.props.userLogin(e);
+        this.props.receiveNew();
         if (e.identity===1){
             this.props.history.push('/');
         } else if (e.identity===2){
@@ -73,3 +78,7 @@ export default class Login extends React.Component {
         )
     }
 }
+export default connect(
+    state =>({user:state.user,news:state.news}),
+    {userLogin,receiveNew}
+)(Login)

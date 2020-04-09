@@ -19,7 +19,7 @@ const defaultUser = {
 function user(state=defaultUser,action) {
     switch (action.type) {
         case LOGIN_SUCCESS:
-            return{...state,user:action.data};
+            return{...state,user:action.data.data};
         case ERR_MSG:
             return{...state,message:action.data};
         default:
