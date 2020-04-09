@@ -7,6 +7,9 @@ export default class Notice extends React.Component {
     state = {
         inform:[1,2,3,4,5,6,7,8,9,10,]
     };
+    onDetail=()=>{
+        this.props.history.push('/teacherPage/noticeDetail')
+    }
 
     render() {
         return (
@@ -17,6 +20,7 @@ export default class Notice extends React.Component {
                             return(
                                 <Col span={23} key={index}>
                                     <Card
+                                        onClick={this.onDetail}
                                         title={`通知${name}`}
                                         size={"small"}
                                         extra={'2020-2-13 09:00'}
