@@ -8,7 +8,8 @@ import {
     TeamOutlined,
     EditOutlined,
     NotificationOutlined,
-    IdcardOutlined
+    IdcardOutlined,
+    LaptopOutlined
 } from '@ant-design/icons';
 
 import './teacher.less'
@@ -19,8 +20,7 @@ import NoticeDetail from "../notice/noticeDetail/noticeDetail";
 import CourseData from "../courseData/courseData";
 
 const {Header, Content, Footer, Sider} = Layout;
-
-
+const {SubMenu} = Menu
 
 
 export default class Teacher extends React.Component {
@@ -47,8 +47,8 @@ export default class Teacher extends React.Component {
         });
     }
 
-    state = {
-    };
+    state = {};
+
     render() {
         return (
             <div>
@@ -78,25 +78,34 @@ export default class Teacher extends React.Component {
                                 <CommentOutlined/>
                                 <span>课下反馈</span>
                             </Menu.Item>
-                            <Menu.Item key="4">
-                                <a href={'/#/teacherPage/courseData'}>
-                                    <PieChartOutlined/>
-                                    <span>课堂统计</span>
-                                </a>
-                            </Menu.Item>
-                            <Menu.Item key="5">
+                            <SubMenu
+                                key="sub2"
+                                title={
+                                    <span>
+                                     <PieChartOutlined/>
+                                      课堂统计
+                                    </span>
+                                    }
+                            >
+                                <Menu.Item key="4">
+                                    <a href={'/#/teacherPage/courseData'}>上课次数</a>
+                                </Menu.Item>
+                                <Menu.Item key="5">出勤率</Menu.Item>
+                                <Menu.Item key="6">请假率</Menu.Item>
+                            </SubMenu>
+                            <Menu.Item key="7">
                                 <EditOutlined/>
                                 <span>课堂评价</span>
                             </Menu.Item>
-                            <Menu.Item key="6">
+                            <Menu.Item key="8">
                                 <a href={'/#/teacherPage/notice'}/>
                                 <Badge dot={true}>
-                                    <NotificationOutlined />
+                                    <NotificationOutlined/>
                                     <span>消息通知</span>
 
                                 </Badge>
                             </Menu.Item>
-                            <Menu.Item key="7">
+                            <Menu.Item key="9">
                                 <IdcardOutlined/>
                                 <span>个人信息</span>
                             </Menu.Item>

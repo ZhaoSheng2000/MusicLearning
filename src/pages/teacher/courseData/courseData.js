@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card} from "antd";
+import {Card, Col, Row} from "antd";
 import { Line } from '@antv/g2plot';
 
 const { Meta } = Card;
@@ -31,12 +31,16 @@ export default class CourseData extends React.Component {
     render() {
         return (
             <div>
-                <Card
-                    title={'学生记录'}
+                <Row gutter={[16,16]}>
+                    <Col span={12}>
+                        <Card
+                            title={'学生记录'}
+                        >
+                            <Meta  description={<div id="canvas"/>} />
+                        </Card>
+                    </Col>
+                </Row>
 
-                >
-                    <Meta  description={<div id="canvas"/>} />
-                </Card>
             </div>
         )
     }
