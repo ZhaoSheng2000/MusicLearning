@@ -16,6 +16,7 @@ import './teacher.less'
 import StudentInform from "../studentInform/studentInform";
 import Notice from "../notice/notice";
 import NoticeDetail from "../notice/noticeDetail/noticeDetail";
+import CourseData from "../courseData/courseData";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -78,8 +79,10 @@ export default class Teacher extends React.Component {
                                 <span>课下反馈</span>
                             </Menu.Item>
                             <Menu.Item key="4">
-                                <PieChartOutlined/>
-                                <span>课程统计</span>
+                                <a href={'/#/teacherPage/courseData'}>
+                                    <PieChartOutlined/>
+                                    <span>课堂统计</span>
+                                </a>
                             </Menu.Item>
                             <Menu.Item key="5">
                                 <EditOutlined/>
@@ -107,6 +110,7 @@ export default class Teacher extends React.Component {
                             <Switch>
                                 <Route path={'/teacherPage/notice'} component={Notice}/>
                                 <Route path={'/teacherPage/noticeDetail'} component={NoticeDetail}/>
+                                <Route path={'/teacherPage/courseData'} component={CourseData}/>
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>
