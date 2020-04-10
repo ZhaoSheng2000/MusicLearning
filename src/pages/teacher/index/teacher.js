@@ -9,7 +9,6 @@ import {
     EditOutlined,
     NotificationOutlined,
     IdcardOutlined,
-    LaptopOutlined
 } from '@ant-design/icons';
 
 import './teacher.less'
@@ -18,6 +17,7 @@ import StudentInform from "../studentInform/studentInform";
 import Notice from "../notice/notice";
 import NoticeDetail from "../notice/noticeDetail/noticeDetail";
 import CourseData from "../courseData/courseData";
+import UserInfo from "../userInfo/userInfo";
 
 const {Header, Content, Footer, Sider} = Layout;
 const {SubMenu} = Menu
@@ -85,7 +85,7 @@ export default class Teacher extends React.Component {
                                      <PieChartOutlined/>
                                       课堂统计
                                     </span>
-                                    }
+                                }
                             >
                                 <Menu.Item key="4">
                                     <a href={'/#/teacherPage/courseData'}>上课次数</a>
@@ -98,16 +98,18 @@ export default class Teacher extends React.Component {
                                 <span>课堂评价</span>
                             </Menu.Item>
                             <Menu.Item key="8">
-                                <a href={'/#/teacherPage/notice'}/>
-                                <Badge dot={true}>
-                                    <NotificationOutlined/>
-                                    <span>消息通知</span>
-
-                                </Badge>
+                                <a href={'/#/teacherPage/notice'}>
+                                    <Badge dot={true}>
+                                        <NotificationOutlined/>
+                                        <span>消息通知</span>
+                                    </Badge>
+                                </a>
                             </Menu.Item>
                             <Menu.Item key="9">
-                                <IdcardOutlined/>
-                                <span>个人信息</span>
+                                <a href={'/#/teacherPage/userInfo'}>
+                                    <IdcardOutlined/>
+                                    <span>个人信息</span>
+                                </a>
                             </Menu.Item>
                         </Menu>
                     </Sider>
@@ -120,6 +122,7 @@ export default class Teacher extends React.Component {
                                 <Route path={'/teacherPage/notice'} component={Notice}/>
                                 <Route path={'/teacherPage/noticeDetail'} component={NoticeDetail}/>
                                 <Route path={'/teacherPage/courseData'} component={CourseData}/>
+                                <Route path={'/teacherPage/userInfo'} component={UserInfo}/>
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>
