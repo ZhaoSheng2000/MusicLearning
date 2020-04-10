@@ -18,6 +18,8 @@ import Notice from "../notice/notice";
 import NoticeDetail from "../notice/noticeDetail/noticeDetail";
 import CourseData from "../courseData/courseData";
 import UserInfo from "../userInfo/userInfo";
+import StudentDetail from "../studentInform/studentDetail/studentDetail";
+
 
 const {Header, Content, Footer, Sider} = Layout;
 const {SubMenu} = Menu
@@ -123,6 +125,7 @@ export default class Teacher extends React.Component {
                                 <Route path={'/teacherPage/noticeDetail'} component={NoticeDetail}/>
                                 <Route path={'/teacherPage/courseData'} component={CourseData}/>
                                 <Route path={'/teacherPage/userInfo'} component={UserInfo}/>
+                                <Route path={'/teacherPage/studentDetail'} component={StudentDetail}/>
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>
