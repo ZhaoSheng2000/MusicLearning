@@ -19,6 +19,7 @@ import NoticeDetail from "../notice/noticeDetail/noticeDetail";
 import CourseData from "../courseData/courseData";
 import UserInfo from "../userInfo/userInfo";
 import StudentDetail from "../studentInform/studentDetail/studentDetail";
+import ClassRecord from "../classRecord/classRecord";
 
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -73,8 +74,10 @@ export default class Teacher extends React.Component {
                                 </a>
                             </Menu.Item>
                             <Menu.Item key="2">
-                                <DesktopOutlined/>
-                                <span>上课记录</span>
+                                <a href={'/#/teacherPage/classRecord'}>
+                                    <DesktopOutlined/>
+                                    <span>上课记录</span>
+                                </a>
                             </Menu.Item>
                             <Menu.Item key="3">
                                 <CommentOutlined/>
@@ -126,6 +129,7 @@ export default class Teacher extends React.Component {
                                 <Route path={'/teacherPage/courseData'} component={CourseData}/>
                                 <Route path={'/teacherPage/userInfo'} component={UserInfo}/>
                                 <Route path={'/teacherPage/studentDetail'} component={StudentDetail}/>
+                                <Route path={'/teacherPage/classRecord'} component={ClassRecord}/>
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>
