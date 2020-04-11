@@ -20,6 +20,7 @@ import CourseData from "../courseData/courseData";
 import UserInfo from "../userInfo/userInfo";
 import StudentDetail from "../studentInform/studentDetail/studentDetail";
 import ClassRecord from "../classRecord/classRecord";
+import RecordDetail from "../classRecord/recordDetail/recordDetail";
 
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -130,6 +131,7 @@ export default class Teacher extends React.Component {
                                 <Route path={'/teacherPage/userInfo'} component={UserInfo}/>
                                 <Route path={'/teacherPage/studentDetail'} component={StudentDetail}/>
                                 <Route path={'/teacherPage/classRecord'} component={ClassRecord}/>
+                                <Route path={'/teacherPage/recordDetail'} component={RecordDetail}/>
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>

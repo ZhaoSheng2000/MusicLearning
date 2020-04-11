@@ -45,10 +45,10 @@ export default class ClassRecord extends React.Component {
                         dataSource={data}
                         renderItem={item => (
                             <List.Item
-                                actions={[<a key="list-loadmore-edit">编辑上课记录</a>]}
+                                actions={[<a key="list-loadmore-edit" href={'/#/teacherPage/recordDetail'}>编辑上课记录</a>]}
                             >
                                 <List.Item.Meta
-                                    title={<a href={'/#/teacherPage'}>{item.title}</a>}
+                                    title={<a href={'/#/teacherPage/recordDetail'}>{item.title}</a>}
                                     description="Ant Design, a design language for background applications, is refined by Ant UED Team"
                                 />
                             </List.Item>
