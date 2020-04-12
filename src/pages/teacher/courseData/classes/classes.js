@@ -4,19 +4,19 @@ import { Line } from '@antv/g2plot';
 
 const { Meta } = Card;
 
-export default class CourseData extends React.Component {
+export default class Classes extends React.Component {
 
     componentDidMount() {
         const data = [
-            { year: '1991', value: 3 },
-            { year: '1992', value: 4 },
-            { year: '1993', value: 3.5 },
-            { year: '1994', value: 5 },
-            { year: '1995', value: 4.9 },
-            { year: '1996', value: 6 },
-            { year: '1997', value: 7 },
-            { year: '1998', value: 9 },
-            { year: '1999', value: 13 },
+            { year: '第一周', value: 3 },
+            { year: '第二周', value: 4 },
+            { year: '第三周', value: 3 },
+            { year: '第四周', value: 5 },
+            { year: '第五周', value: 4 },
+            { year: '第六周', value: 6 },
+            { year: '第七周', value: 7 },
+            { year: '第八周', value: 9 },
+            { year: '第九周', value: 3 },
         ];
 
         const linePlot = new Line('canvas', {
@@ -32,9 +32,9 @@ export default class CourseData extends React.Component {
         return (
             <div>
                 <Row gutter={[16,16]}>
-                    <Col span={12}>
+                    <Col span={24}>
                         <Card
-                            title={'学生记录'}
+                            title={'上课次数'}
                         >
                             <Meta  description={<div id="canvas"/>} />
                         </Card>

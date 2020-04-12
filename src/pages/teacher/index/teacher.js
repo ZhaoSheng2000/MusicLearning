@@ -16,7 +16,7 @@ import './teacher.less'
 import StudentInform from "../studentInform/studentInform";
 import Notice from "../notice/notice";
 import NoticeDetail from "../notice/noticeDetail/noticeDetail";
-import CourseData from "../courseData/courseData";
+import Classes from "../courseData/classes/classes";
 import UserInfo from "../userInfo/userInfo";
 import StudentDetail from "../studentInform/studentDetail/studentDetail";
 import ClassRecord from "../classRecord/classRecord";
@@ -135,7 +135,7 @@ export default class Teacher extends React.Component {
                             <Switch>
                                 <Route path={'/teacherPage/notice'} component={Notice}/>
                                 <Route path={'/teacherPage/noticeDetail'} component={NoticeDetail}/>
-                                <Route path={'/teacherPage/courseData'} component={CourseData}/>
+                                <Route path={'/teacherPage/courseData'} component={Classes}/>
                                 <Route path={'/teacherPage/userInfo'} component={UserInfo}/>
                                 <Route path={'/teacherPage/studentDetail'} component={StudentDetail}/>
                                 <Route path={'/teacherPage/classRecord'} component={ClassRecord}/>
