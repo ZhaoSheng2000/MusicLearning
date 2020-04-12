@@ -22,6 +22,7 @@ import StudentDetail from "../studentInform/studentDetail/studentDetail";
 import ClassRecord from "../classRecord/classRecord";
 import RecordDetail from "../classRecord/recordDetail/recordDetail";
 import ClassFeedback from "../classFeedback/classFeedback";
+import FeedbackDetail from "../classFeedback/feedbackDetail/feedbackDetail";
 
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -82,8 +83,10 @@ export default class Teacher extends React.Component {
                                 </a>
                             </Menu.Item>
                             <Menu.Item key="3">
-                                <CommentOutlined/>
-                                <span>课下反馈</span>
+                                <a href={'/#/teacherPage/classFeedback'}>
+                                    <CommentOutlined/>
+                                    <span>课下反馈</span>
+                                </a>
                             </Menu.Item>
                             <SubMenu
                                 key="sub2"
@@ -133,7 +136,8 @@ export default class Teacher extends React.Component {
                                 <Route path={'/teacherPage/studentDetail'} component={StudentDetail}/>
                                 <Route path={'/teacherPage/classRecord'} component={ClassRecord}/>
                                 <Route path={'/teacherPage/recordDetail'} component={RecordDetail}/>
-                                <Route path={'teacherPage/classFeedback'} component={ClassFeedback}/>
+                                <Route path={'/teacherPage/classFeedback'} component={ClassFeedback}/>
+                                <Route path={'/teacherPage/feedbackDetail'} component={FeedbackDetail}/>
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>

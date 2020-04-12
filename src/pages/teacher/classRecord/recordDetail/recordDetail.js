@@ -79,6 +79,7 @@ export default class RecordDetail extends React.Component {
                                                        student: data
                                                    })
                                                }
+                                               return null
                                            })
                                        }}
                                 />
