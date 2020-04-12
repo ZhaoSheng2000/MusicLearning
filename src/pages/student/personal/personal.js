@@ -1,5 +1,5 @@
 import React from 'react'
-import {Avatar, Typography, Statistic, Card, Progress} from 'antd';
+import {Avatar, Typography, Statistic, Card, Progress, Button} from 'antd';
 import {
     LikeOutlined,
     ClockCircleOutlined,
@@ -84,6 +84,13 @@ export default class Personal extends React.Component {
                                                     <Text type={"warning"}>
                                                         周一至周五14：00--16：00
                                                     </Text>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <div>
+                                                        <Button type={"primary"}>提问老师</Button>&nbsp;
+                                                        <Button type={"primary"}>评价课程</Button>
+                                                    </div>
                                                 </Col>
                                             </Row>
                                         </Card>

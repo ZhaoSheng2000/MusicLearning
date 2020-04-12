@@ -36,13 +36,23 @@ export default class RecordDetail extends React.Component {
                     <List
                         header={
                             <Row>
-                                <Col span={4}>
+                                <Col span={8}>
                                     学生名称
                                 </Col>
-                                <Col span={8}>
+                                <Col span={10}>
                                     上课状态
                                 </Col>
+                                <Col span={6}>
+                                    备注
+                                </Col>
                             </Row>
+
+                        }
+                        footer={
+                            <div style={{textAlign:"right"}}>
+                                <Button type={"primary"} >确认</Button>
+                            </div>
+
                         }
                         itemLayout="horizontal"
                         dataSource={this.state.student}
