@@ -23,6 +23,7 @@ import ClassRecord from "../classRecord/classRecord";
 import RecordDetail from "../classRecord/recordDetail/recordDetail";
 import ClassFeedback from "../classFeedback/classFeedback";
 import FeedbackDetail from "../classFeedback/feedbackDetail/feedbackDetail";
+import ClassComment from "../classComment/classComment";
 
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -104,8 +105,10 @@ export default class Teacher extends React.Component {
                                 <Menu.Item key="6">请假率</Menu.Item>
                             </SubMenu>
                             <Menu.Item key="7">
-                                <EditOutlined/>
-                                <span>课堂评价</span>
+                                <a href={'/#/teacherPage/classComment'}>
+                                    <EditOutlined/>
+                                    <span>课堂评价</span>
+                                </a>
                             </Menu.Item>
                             <Menu.Item key="8">
                                 <a href={'/#/teacherPage/notice'}>
@@ -138,6 +141,7 @@ export default class Teacher extends React.Component {
                                 <Route path={'/teacherPage/recordDetail'} component={RecordDetail}/>
                                 <Route path={'/teacherPage/classFeedback'} component={ClassFeedback}/>
                                 <Route path={'/teacherPage/feedbackDetail'} component={FeedbackDetail}/>
+                                <Route path={'/teacherPage/classComment'} component={ClassComment}/>
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>

@@ -1,38 +1,21 @@
 import React from 'react'
-import {Statistic, Row, Col, Card, Typography, Progress, Button} from 'antd';
+import {Button, Card, Col, Progress, Row, Typography} from "antd";
 
-const {Title, Text} = Typography;
+const {Title, Paragraph, Text} = Typography;
 
-export default class ClassRecord extends React.Component {
+export default class ClassComment extends React.Component {
 
-    state = {course: [1, 2, 3, 4, 5, 6, 7]};
-
-    onDetail=()=>{
-        this.props.history.push('/teacherPage/recordDetail')
-    }
+    state = {course:[1,2,3,4,5,6,7]};
 
     render() {
         return (
             <div>
-                <Card>
-                    <Row gutter={16}>
-                        <Col span={8}>
-                            <Statistic title="我的课程" value={8} suffix={' 个'}/>
-                        </Col>
-                        <Col span={8}>
-                            <Statistic title="待处理课程" value={3} suffix={'个'}/>
-                        </Col>
-                        <Col span={8}>
-                            <Statistic title="本周已上课程" value={3} suffix={'节'}/>
-                        </Col>
-                    </Row>
-                </Card>
-                <Title level={3} style={{paddingTop:10}}>我的课程</Title>
-                <Row gutter={[16, 16]}>
+                <Title level={3}>我的课程</Title>
+                <Row gutter={[16,16]}>
                     <Col span={22}>
                         {
-                            this.state.course.map((name, index) => {
-                                return (
+                            this.state.course.map((name,index)=>{
+                                return(
                                     <Card hoverable key={index}>
                                         <Row gutter={16}>
                                             <Col span={8}>
@@ -43,7 +26,7 @@ export default class ClassRecord extends React.Component {
                                                 <br/>
                                                 <br/>
                                                 <Text>已上课时</Text><br/>
-                                                <Progress style={{width: 200}} percent={80}/>
+                                                <Progress style={{width:200}} percent={80} />
                                             </Col>
                                             <Col span={8}>
                                                 <Title level={4}>上课时间</Title>
@@ -54,7 +37,7 @@ export default class ClassRecord extends React.Component {
                                                 <br/>
                                                 <br/>
                                                 <div>
-                                                    <Button type={"primary"} onClick={this.onDetail}>编辑上课记录</Button>
+                                                    <Button type={"primary"}>查看评价</Button>
                                                 </div>
                                             </Col>
                                         </Row>
@@ -64,7 +47,6 @@ export default class ClassRecord extends React.Component {
                         }
                     </Col>
                 </Row>
-
 
             </div>
         )

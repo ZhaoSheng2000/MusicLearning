@@ -1,5 +1,5 @@
 import React from 'react'
-import {Avatar, Typography, Statistic, Card, Progress, Button} from 'antd';
+import {Avatar, Typography, Statistic, Card, Progress, Button,Col, Row} from 'antd';
 import {
     LikeOutlined,
     ClockCircleOutlined,
@@ -8,7 +8,6 @@ import {
 
 import './personal.less'
 
-import {Col, Row} from "antd";
 
 const {Title, Paragraph, Text} = Typography;
 
