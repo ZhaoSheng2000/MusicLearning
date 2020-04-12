@@ -25,6 +25,7 @@ export default class Classes extends React.Component {
             yField: 'value',
         });
 
+
         linePlot.render();
     }
     state = {};
