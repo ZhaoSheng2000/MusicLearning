@@ -1,11 +1,16 @@
 import React from 'react'
 import {Button, Card, Col, Progress, Row, Typography} from "antd";
 
-const {Title, Paragraph, Text} = Typography;
+const {Title, Text} = Typography;
 
 export default class ClassComment extends React.Component {
 
     state = {course:[1,2,3,4,5,6,7]};
+
+    onCommentDetail=(index)=>{
+        console.log(index);
+        this.props.history.push("/teacherPage/commentDetail")
+    };
 
     render() {
         return (
@@ -14,9 +19,8 @@ export default class ClassComment extends React.Component {
                 <Row gutter={[16,16]}>
                     <Col span={22}>
                         {
-                            this.state.course.map((name,index)=>{
-                                return(
-                                    <Card hoverable key={index}>
+                            this.state.course.map((name,index)=>(
+                                    <Card  key={index}>
                                         <Row gutter={16}>
                                             <Col span={8}>
                                                 <img alt='course' src="https://s1.ax1x.com/2020/03/31/GMW6IS.jpg"/>
@@ -37,13 +41,13 @@ export default class ClassComment extends React.Component {
                                                 <br/>
                                                 <br/>
                                                 <div>
-                                                    <Button type={"primary"}>查看评价</Button>
+                                                    <Button  type={"primary"} onClick={()=>this.onCommentDetail(index)}>查看评价</Button>
                                                 </div>
                                             </Col>
                                         </Row>
                                     </Card>
                                 )
-                            })
+                            )
                         }
                     </Col>
                 </Row>
