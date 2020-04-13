@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route, Switch} from "react-router-dom";
 import { Layout, Menu } from 'antd';
+import './admin.less'
 
 import {
     BarChartOutlined,
@@ -9,9 +10,9 @@ import {
     UploadOutlined,
 } from '@ant-design/icons';
 
-import './admin.less'
 
 import StudentInform from "../studentInform/studentInform";
+import UploadTeacher from "../uploadTeacher/uploadTeacher";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -41,8 +42,11 @@ export default class Admin extends React.Component {
                                 </a>
                             </Menu.Item>
                             <Menu.Item key="3">
-                                <UploadOutlined />
-                                <span className="nav-text">上传教师信息</span>
+                                <a href={'/#/admin/uploadTeacher'}>
+                                    <UploadOutlined />
+                                    <span className="nav-text">上传教师信息</span>
+                                </a>
+
                             </Menu.Item>
                             <Menu.Item key="5">
                                 <CloudOutlined />
@@ -60,7 +64,7 @@ export default class Admin extends React.Component {
                         </Header>
                         <Content style={{margin: '16px 16px'}}>
                             <Switch>
-
+                                <Route component={UploadTeacher} path={'/admin/uploadTeacher'}/>
                                 <Route  component={StudentInform}/>
                             </Switch>
                         </Content>
