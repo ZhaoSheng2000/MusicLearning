@@ -8,7 +8,6 @@ export default class UpdateNews extends React.Component {
     render() {
         return (
             <div>
-
             </div>
         )
     }
