@@ -2,7 +2,7 @@ import React from 'react'
 import {Card, Table, Tag, Input, Button, Modal, Form, InputNumber} from "antd";
 
 const {Search} = Input;
-const {Column, ColumnGroup} = Table;
+const {Column} = Table;
 
 const layout = {
     labelCol: {span: 6},

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Switch} from "react-router-dom";
-import { Layout, Menu } from 'antd';
+import {Layout, Menu} from 'antd';
 import './admin.less'
 
 import {
@@ -13,8 +13,9 @@ import {
 
 import StudentInform from "../studentInform/studentInform";
 import UploadTeacher from "../uploadTeacher/uploadTeacher";
+import UpdateNews from "../updateNews/updateNews";
 
-const { Header, Content, Footer, Sider } = Layout;
+const {Header, Content, Footer, Sider} = Layout;
 
 
 export default class Admin extends React.Component {
@@ -33,39 +34,41 @@ export default class Admin extends React.Component {
                             left: 0,
                         }}
                     >
-                        <div className="myLogo" />
+                        <div className="myLogo"/>
                         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                             <Menu.Item key="1">
                                 <a href={'/#/admin'}>
-                                    <UserOutlined />
+                                    <UserOutlined/>
                                     <span className="nav-text">编辑学生信息</span>
                                 </a>
                             </Menu.Item>
                             <Menu.Item key="3">
                                 <a href={'/#/admin/uploadTeacher'}>
-                                    <UploadOutlined />
+                                    <UploadOutlined/>
                                     <span className="nav-text">上传教师信息</span>
                                 </a>
-
                             </Menu.Item>
                             <Menu.Item key="5">
-                                <CloudOutlined />
-                                <span className="nav-text">更新实时资讯</span>
+                                <a href={'/#/admin/updateNews'}>
+                                    <CloudOutlined/>
+                                    <span className="nav-text">更新实时资讯</span>
+                                </a>
                             </Menu.Item>
                             <Menu.Item key="6">
-                                <BarChartOutlined />
+                                <BarChartOutlined/>
                                 <span className="nav-text">出勤率图表</span>
                             </Menu.Item>
                         </Menu>
                     </Sider>
-                    <Layout className="site-layout" style={{ marginLeft: 200 }}>
+                    <Layout className="site-layout" style={{marginLeft: 200}}>
                         <Header className="site-layout-background" style={{padding: 0}}>
                             <h1 style={{paddingLeft: 25}}>后台管理</h1>
                         </Header>
                         <Content style={{margin: '16px 16px'}}>
                             <Switch>
-                                <Route component={UploadTeacher} path={'/admin/uploadTeacher'}/>
-                                <Route  component={StudentInform}/>
+                                <Route path={'/admin/uploadTeacher'} component={UploadTeacher}/>
+                                <Route path={'/admin/updateNews'} component={UpdateNews}/>
+                                <Route component={StudentInform}/>
                             </Switch>
                         </Content>
                         <Footer style={{textAlign: 'center'}}>Music Learning ©2020 Created by Zhao Sheng</Footer>
