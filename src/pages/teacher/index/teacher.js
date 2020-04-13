@@ -108,7 +108,7 @@ export default class Teacher extends React.Component {
                             <Menu.Item key="7">
                                 <a href={'/#/teacherPage/classComment'}>
                                     <EditOutlined/>
-                                    <span>课堂评价</span>
+                                    <span>评价讨论</span>
                                 </a>
                             </Menu.Item>
                             <Menu.Item key="8">

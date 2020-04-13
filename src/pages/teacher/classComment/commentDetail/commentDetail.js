@@ -32,7 +32,7 @@ export default class CommentDetail extends React.Component {
                         dataSource={data}
                         renderItem={item => (
                             <List.Item
-                                actions={[<a key="list-loadmore-more">删除</a>]}
+                                actions={[<a href={'/'}>删除</a>]}
                             >
                                 <List.Item.Meta
                                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}

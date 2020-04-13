@@ -42,6 +42,8 @@ export default class ClassComment extends React.Component {
                                                 <br/>
                                                 <div>
                                                     <Button  type={"primary"} onClick={()=>this.onCommentDetail(index)}>查看评价</Button>
+                                                    &nbsp;&nbsp; <Button  type={"primary"}>新建讨论</Button>
+
                                                 </div>
                                             </Col>
                                         </Row>
