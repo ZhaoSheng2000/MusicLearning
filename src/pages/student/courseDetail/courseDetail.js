@@ -14,54 +14,16 @@ const { RangePicker } = TimePicker;
 
 const data = [
     {
-        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-        author: 'Han Solo',
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        content: (
-            <p>
-                We supply a series of design principles, practical patterns and high quality design
-                resources (Sketch and Axure), to help people create their product prototypes beautifully and
-                efficiently.
-            </p>
-        ),
-        datetime: (
-            <Tooltip
-                title={moment()
-                    .subtract(1, 'days')
-                    .format('YYYY-MM-DD HH:mm:ss')}
-            >
-        <span>
-          {moment()
-              .subtract(1, 'days')
-              .fromNow()}
-        </span>
-            </Tooltip>
-        ),
+        title: 'Ant Design Title 1',
     },
     {
-        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-        author: 'Han Solo',
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        content: (
-            <p>
-                We supply a series of design principles, practical patterns and high quality design
-                resources (Sketch and Axure), to help people create their product prototypes beautifully and
-                efficiently.
-            </p>
-        ),
-        datetime: (
-            <Tooltip
-                title={moment()
-                    .subtract(2, 'days')
-                    .format('YYYY-MM-DD HH:mm:ss')}
-            >
-        <span>
-          {moment()
-              .subtract(2, 'days')
-              .fromNow()}
-        </span>
-            </Tooltip>
-        ),
+        title: 'Ant Design Title 2',
+    },
+    {
+        title: 'Ant Design Title 3',
+    },
+    {
+        title: 'Ant Design Title 4',
     },
 ];
 
@@ -197,15 +159,13 @@ export default class CourseDetail extends React.Component {
                                             itemLayout="horizontal"
                                             dataSource={data}
                                             renderItem={item => (
-                                                <li>
-                                                    <Comment
-                                                        actions={item.actions}
-                                                        author={item.author}
-                                                        avatar={item.avatar}
-                                                        content={item.content}
-                                                        datetime={item.datetime}
+                                                <List.Item>
+                                                    <List.Item.Meta
+                                                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                                                        title={<a href="https://ant.design">{item.title}</a>}
+                                                        description="Ant Design, a design language for background applications, is refined by Ant UED Team"
                                                     />
-                                                </li>
+                                                </List.Item>
                                             )}
                                         />
                                     </TabPane>
