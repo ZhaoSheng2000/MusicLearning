@@ -2,6 +2,7 @@ import React from 'react'
 import {Card, Table, Tag, Input, Button, Modal, Form, InputNumber} from "antd";
 
 const {Search} = Input;
+
 const {Column} = Table;
 
 const layout = {
@@ -110,7 +111,9 @@ const data = [
 
 export default class StudentInform extends React.Component {
 
-    state = {visible: false};
+    state = {
+        visible: false,
+    };
 
     showModal = () => {
         this.setState({

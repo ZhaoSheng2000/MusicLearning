@@ -14,6 +14,7 @@ import {
 import StudentInform from "../studentInform/studentInform";
 import UploadTeacher from "../uploadTeacher/uploadTeacher";
 import UpdateNews from "../updateNews/updateNews";
+import NewsDetail from "../updateNews/newsDetail/newsDetail";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -64,10 +65,11 @@ export default class Admin extends React.Component {
                         <Header className="site-layout-background" style={{padding: 0}}>
                             <h1 style={{paddingLeft: 25}}>后台管理</h1>
                         </Header>
-                        <Content style={{margin: '16px 16px'}}>
+                        <Content style={{margin: '16px 16px',minHeight:window.innerHeight-170}}>
                             <Switch>
                                 <Route path={'/admin/uploadTeacher'} component={UploadTeacher}/>
                                 <Route path={'/admin/updateNews'} component={UpdateNews}/>
+                                <Route path={'/admin/newsDetail'} component={NewsDetail}/>
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>
