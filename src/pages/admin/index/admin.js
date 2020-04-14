@@ -57,8 +57,10 @@ export default class Admin extends React.Component {
                                 </a>
                             </Menu.Item>
                             <Menu.Item key="6">
-                                <BarChartOutlined/>
-                                <span className="nav-text">出勤率图表</span>
+                                <a href={'/#/admin/Chart'}>
+                                    <BarChartOutlined/>
+                                    <span className="nav-text">出勤率图表</span>
+                                </a>
                             </Menu.Item>
                         </Menu>
                     </Sider>
