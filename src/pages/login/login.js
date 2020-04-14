@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Form,  Input, Button, Card,Radio} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-import {userLogin,receiveNew} from "../redux/actions";
+import {userLogin,receiveNew} from "../student/redux/actions";
 
 class Login extends React.Component {
     state = {
