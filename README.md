@@ -1,68 +1,96 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 一站式音乐学习平台
 
-## Available Scripts
+一款集学生端，教师端，管理员后台于一体的综合学习管理平台，从课堂到线下形成一套完整的管理体系。
 
-In the project directory, you can run:
+## 框架
+- Create React App
+- AntV/G2
 
-### `yarn start`
+## 用户角色
+- 学生
+- 教师
+- 管理员
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 主要功能
+- 基础信息管理
+- 学生作业管理
+- 老师管理
+- 音乐练习管理
+- 课堂管理
+- 资讯通知管理
+- 等。。。。。。
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### 学生
+- 接收信息资讯
+- 选择上课教师
+- 选择上课种类
+- 预约时间
+- 课堂反馈及评分
+- 晚上报名赛事
+- 等...... 
 
-### `yarn test`
+### 教师
+- 接收信息管理
+- 文件上传汇报
+- 讯息接收
+- 学生管理
+- 学生数据图表查看
+- 课下反馈
+- 等......
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 管理员
+- 上传编辑学生信息
+- 上传编辑老师信息
+- 实时更新信息资讯
+- 出勤率图表生成
+- 等......
 
-### `yarn build`
+## 界面需求
+登录界面：实行三种模式登录，学生、教师、管理员。登录后进入不同的界面。
+### 学生界面
+1. 个人信息注册（头像、姓名、年龄、音乐学习基础、家长姓名、手机号）
+2. 老师资料查看（对时事更新的老师资料进行浏览查询）（浏览可分人名查找或上课种类查询）
+3. 选择课程
+4. 预约上课时间（对选中的老师进行固定时间段的选择）
+5. 上课信息浏览（上课老师、种类、上课日期时间、上课时长、试课/正课，查看评语）
+6. 学生对教师评价（意见反馈后对应教师端接受信息）
+7. 线下提问
+8. 学习交流区（交流讨论区）
+9. 浏览资讯页面（发布的公告、发布的最新新闻、发布赛事、优秀学生视频展播等）
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 教师界面
+1. 个人信息填写页面（头像、姓名、年龄、教学时常、.....等等）
+2. 学生信息浏览页面
+3. 上课记录查看
+4. 对学生进行课下作业反馈
+5. 查看图表（按月学生上课次数、出勤、请假等）
+6. 查看学生评价
+7. 接受讯息通告（管理员对于工作上通知）
+8. 浏览资讯页面
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### 管理员界面
+1. 用户信息维护：新增、修改、删除
+2. 用户信息查询：查询关键字
+3. 教师信息管理
+3. 对浏览资讯页面的信息编辑（发布的公告、发布的最新新闻、发布赛事、优秀学生视频展播等）
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 部分页面预览
+![](.README_images/34a513f0.png)
+登录
+![](.README_images/226ad741.png)
+学生端主页
+![](.README_images/f943309f.png)
+教师详情
+![](.README_images/34b08b99.png)
+教师后台上课记录
+![](.README_images/f8a65c33.png)
+管理员后台
+![](.README_images/7c1acec7.png)
+统计信息
+## 项目部署
+1. 克隆代码到本地
+`https://github.com/ZhaoSheng2000/MusicLearning.git`
+2. 执行 `yarn start`
+## LICENSE
+Apache License 2.0
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
