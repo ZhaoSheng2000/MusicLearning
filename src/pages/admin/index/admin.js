@@ -15,6 +15,7 @@ import StudentInform from "../studentInform/studentInform";
 import UploadTeacher from "../uploadTeacher/uploadTeacher";
 import UpdateNews from "../updateNews/updateNews";
 import NewsDetail from "../updateNews/newsDetail/newsDetail";
+import Chart from "../chart/chart";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -70,6 +71,7 @@ export default class Admin extends React.Component {
                                 <Route path={'/admin/uploadTeacher'} component={UploadTeacher}/>
                                 <Route path={'/admin/updateNews'} component={UpdateNews}/>
                                 <Route path={'/admin/newsDetail'} component={NewsDetail}/>
+                                <Route path={'/admin/Chart'} component={Chart}/>
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>
