@@ -1,9 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Carousel, Row, Col, Card, Avatar, Button, Typography, BackTop} from 'antd';
+import {Carousel, Row, Col, Card, Avatar, Button, Typography, BackTop, message} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
+import Cookies from "js-cookie"
 
-import {receiveNew} from "../redux/actions";
+
+import {receiveNew, userInfo, receiveMyCourse, receiveAllCourse} from "../../redux/actions";
 import './home.less'
 
 const {Title} = Typography;
@@ -15,10 +17,19 @@ class Home extends React.Component {
         yinyue: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     };
 
-    onNews=()=>{
+    componentDidMount() {
+        const id = Cookies.get("userId");
+        if (!id) {
+            message.error('请先登录！');
+            this.props.history.push('/login')
+        }
         this.props.receiveNew();
+        const userId = Cookies.get("userId");
+        this.props.userInfo(userId);
+        this.props.receiveMyCourse(userId);
+        this.props.receiveAllCourse();
 
-    };
+    }
 
     onCourseDetail = () => {
         this.props.history.push('/courseDetail')
@@ -29,10 +40,18 @@ class Home extends React.Component {
     onQuestion = () => {
         this.props.history.push('/discussDetail')
     }
+    onPersonal = () => {
+        this.props.history.push('/personal')
+    }
 
     render() {
         const {news} = this.props.news;
-            console.log(news);
+        const {userinfo} = this.props.userinfo
+        const myCourse = this.props.myCourse.mycourse
+        const allCourse = this.props.allCourse
+        console.log(allCourse)
+
+
         return (
             <div>
                 <Row gutter={12}>
@@ -56,13 +75,16 @@ class Home extends React.Component {
                         <Card style={{width: 200, height: 380}}>
                             <div style={{textAlign: "center"}}>
                                 <Avatar size={64}
-                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
-                                <h2 style={{padding: 20}}>赵盛</h2>
-                                <p>XXXX课程</p>
-                                <p>XXXX课程</p>
-                                <p>XXXX课程</p>
+                                        src={userinfo.picture}/>
+                                <h2 style={{padding: 20}}>{userinfo.nickname}</h2>
+                                {myCourse.slice(0, 3).map((name, index) => {
+                                    return (
+                                        <p key={index}>{name.course_title}</p>
+                                    )
+                                })}
+
                                 <div className="myBotton">
-                                    <Button type="primary" block onClick={this.onNews}>
+                                    <Button type="primary" block onClick={this.onPersonal}>
                                         我的课程
                                     </Button>
                                 </div>
@@ -76,16 +98,16 @@ class Home extends React.Component {
                 </div>
                 <Row gutter={16}>
                     {
-                      this.state.tuijian.map((name, index) => {
+                        news.map((name, index) => {
                             return (
                                 <Col span={6} key={index}>
                                     <Card
                                         onClick={this.onInformationDetail}
                                         hoverable
                                         style={{width: 300}}
-                                        cover={<img alt="example" src="https://s1.ax1x.com/2020/03/30/GmzF8x.jpg"/>}
+                                        cover={<img alt="example" src={name.picture}/>}
                                     >
-                                        <Meta title={`资讯${name}`} description="简介简介。。。。。。。简介"/>
+                                        <Meta title={name.title} description={name.intro}/>
                                     </Card>
                                 </Col>
                             )
@@ -239,7 +261,7 @@ class Home extends React.Component {
                             <div style={{textAlign: "center"}}>
                                 <Avatar size={100} icon={<UserOutlined/>}/>
                                 <div>
-                                    <h2 className='mystudy'>xxx学生</h2>
+                                    <h2 className='mystudy'>学生</h2>
                                     <p className='footercomment'>
                                         我第一次感受到故宫角楼在夕阳下震撼的美，便是在考完《中国古代建筑艺术》之后的那个下午；学完了《不朽的艺术》，再去博物馆不再是陪儿子完成任务了。让我感受最深的就是鲍勃·迪伦的那句“昔日我曾苍老，如今风华正茂”
                                         。
@@ -251,7 +273,7 @@ class Home extends React.Component {
                             <div style={{textAlign: "center"}}>
                                 <Avatar size={100} icon={<UserOutlined/>}/>
                                 <div>
-                                    <h2 className='mystudy'>xxx学生</h2>
+                                    <h2 className='mystudy'>学生</h2>
                                     <p className='footercomment'>
                                         我第一次感受到故宫角楼在夕阳下震撼的美，便是在考完《中国古代建筑艺术》之后的那个下午；学完了《不朽的艺术》，再去博物馆不再是陪儿子完成任务了。让我感受最深的就是鲍勃·迪伦的那句“昔日我曾苍老，如今风华正茂”
                                         。
@@ -263,7 +285,7 @@ class Home extends React.Component {
                             <div style={{textAlign: "center"}}>
                                 <Avatar size={100} icon={<UserOutlined/>}/>
                                 <div>
-                                    <h2 className='mystudy'>xxx学生</h2>
+                                    <h2 className='mystudy'>学生</h2>
                                     <p className='footercomment'>
                                         我第一次感受到故宫角楼在夕阳下震撼的美，便是在考完《中国古代建筑艺术》之后的那个下午；学完了《不朽的艺术》，再去博物馆不再是陪儿子完成任务了。让我感受最深的就是鲍勃·迪伦的那句“昔日我曾苍老，如今风华正茂”
                                         。
@@ -283,9 +305,13 @@ class Home extends React.Component {
 
 
 export default connect(
-    state => ({news:state.news}),
-    {receiveNew}
-)(Home);
+    state => ({
+        news: state.news,
+        user: state.user,
+        userinfo: state.userInfo,
+        myCourse: state.myCourse,
+        allCourse:state.allCourse
+    }), {receiveNew, userInfo, receiveMyCourse, receiveAllCourse})(Home);
 
 
 

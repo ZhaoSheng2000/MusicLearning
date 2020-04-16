@@ -1,7 +1,5 @@
 import React from 'react'
-import {Col, Row, Typography, Breadcrumb, Button, Tabs, Card, Avatar,Comment,Tooltip,List,Modal,TimePicker} from "antd";
-
-import moment from 'moment';
+import {Col, Row, Typography, Breadcrumb, Button, Tabs, Card, Avatar,List,Modal,TimePicker} from "antd";
 
 import {
     RadarChartOutlined,

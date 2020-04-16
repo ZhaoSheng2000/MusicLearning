@@ -6,6 +6,7 @@ import Teacher from "./pages/teacher/index/teacher";
 import Admin from "./pages/admin/index/admin";
 import Login from "./pages/login/login";
 
+
 function App() {
     return (
         <HashRouter>

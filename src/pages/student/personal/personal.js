@@ -24,34 +24,34 @@ export default class Personal extends React.Component {
                 <div className='top-bg'>
                     <Row gutter={16}>
                         <Col span={4}>
-                            <div style={{textAlign: 'center', paddingTop: 40}}>
-                                <Avatar size={100}
+                            <div style={{textAlign: 'center', paddingTop: 10}}>
+                                <Avatar size={64}
                                         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
                             </div>
                         </Col>
                         <Col span={10}>
-                            <div style={{paddingTop: 70}}>
-                                <Title style={{color: "white"}}>郑州轻工业大学</Title>
+                            <div style={{paddingTop: 30}}>
+                                <Title level={3} style={{color: "white"}}>赵盛</Title>
                             </div>
                         </Col>
                         <Col span={3}>
-                            <div style={{paddingTop: 60}}>
+                            <div style={{paddingTop: 10}}>
                                 <Statistic valueStyle={{color: "white"}}
-                                           title={<Title level={3} style={{color: "white"}}>回复</Title>} value={4}
+                                           title={<Title level={4} style={{color: "white"}}>回复</Title>} value={4}
                                            prefix={<CommentOutlined/>}/>
                             </div>
                         </Col>
                         <Col span={3}>
-                            <div style={{paddingTop: 60}}>
+                            <div style={{paddingTop: 10}}>
                                 <Statistic valueStyle={{color: "white"}}
-                                           title={<Title level={3} style={{color: "white"}}>点赞</Title>} value={1128}
+                                           title={<Title level={4} style={{color: "white"}}>点赞</Title>} value={1128}
                                            prefix={<LikeOutlined/>}/>
                             </div>
                         </Col>
                         <Col span={3}>
-                            <div style={{paddingTop: 60}}>
+                            <div style={{paddingTop: 10}}>
                                 <Statistic valueStyle={{color: "white"}}
-                                           title={<Title level={3} style={{color: "white"}}>学习进度</Title>} value={"93%"}
+                                           title={<Title level={4} style={{color: "white"}}>学习进度</Title>} value={"93%"}
                                            prefix={<ClockCircleOutlined/>}/>
                             </div>
                         </Col>

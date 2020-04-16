@@ -1,26 +1,38 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Form,  Input, Button, Card,Radio} from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {Form, Input, Button, Card, Radio} from 'antd';
+import {UserOutlined, LockOutlined} from '@ant-design/icons';
+import Cookies from 'js-cookie'
+import axios from 'axios'
+import "../../mock/loginMock";
 
-import {userLogin,receiveNew} from "../student/redux/actions";
+
+import {userLogin} from "../redux/actions";
 
 class Login extends React.Component {
     state = {
         identity: 1
     };
-    onFinish =(e)=>{
+    onFinish = (e) => {
         console.log(e);
         this.props.userLogin(e);
         this.props.receiveNew();
-        if (e.identity===1){
-            this.props.history.push('/');
-        } else if (e.identity===2){
-            this.props.history.push('/teacherPage')
-        }else {
-            this.props.history.push('/admin')
-        }
+        axios.post('/my/login', {
+            username: e.username,
+            password: e.password
+        }).then(r => {
+            const userId = r.data.data[0].id;
+            Cookies.set("userId", userId, {expires: 1});
+            if (e.identity === 1) {
+                this.props.history.push('/');
+            } else if (e.identity === 2) {
+                this.props.history.push('/teacherPage')
+            } else {
+                this.props.history.push('/admin')
+            }
+        });
     };
+
 
     render() {
         return (
@@ -43,23 +55,23 @@ class Login extends React.Component {
                     >
                         <Form.Item
                             name="username"
-                            rules={[{ required: true, message: '请输入您的用户名！' }]}
+                            rules={[{required: true, message: '请输入您的用户名！'}]}
                         >
-                            <Input prefix={<UserOutlined />} placeholder="Username" />
+                            <Input prefix={<UserOutlined/>} placeholder="Username"/>
                         </Form.Item>
                         <Form.Item
                             name="password"
-                            rules={[{ required: true, message: '请输入您的密码！' }]}
+                            rules={[{required: true, message: '请输入您的密码！'}]}
                         >
                             <Input
-                                prefix={<LockOutlined />}
+                                prefix={<LockOutlined/>}
                                 type="password"
                                 placeholder="Password"
                             />
                         </Form.Item>
                         <Form.Item
                             name="identity"
-                            rules={[{ required: true, message: ' 请选择您的身份！' }]}
+                            rules={[{required: true, message: ' 请选择您的身份！'}]}
                         >
                             <Radio.Group value={this.state.identity}>
                                 <Radio value={1}>我是学生</Radio>
@@ -78,7 +90,8 @@ class Login extends React.Component {
         )
     }
 }
+
 export default connect(
-    state =>({user:state.user,news:state.news}),
-    {userLogin,receiveNew}
+    state => ({user: state.user}),
+    {userLogin}
 )(Login)

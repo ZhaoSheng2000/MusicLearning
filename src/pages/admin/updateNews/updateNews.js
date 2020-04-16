@@ -1,27 +1,10 @@
 import React from 'react'
-import {Card, Tabs, Table, Button, Tag} from "antd";
+import {Card, Tabs, Table, Button} from "antd";
 
 const {TabPane} = Tabs;
 const {Column} = Table;
 
-const columns = [
-    {
-        title: '标题',
-        dataIndex: 'name',
-    },
-    {
-        title: '作者',
-        dataIndex: 'age',
-    },
-    {
-        title: '简介',
-        dataIndex: 'address',
-    },
-    {
-        title: '操作',
-    },
 
-];
 const data = [];
 for (let i = 0; i < 46; i++) {
     data.push({

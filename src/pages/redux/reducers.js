@@ -7,7 +7,10 @@ import {combineReducers} from 'redux'
 import {
     LOGIN_SUCCESS,
     ERR_MSG,
-    RECEIVE_NEWS
+    RECEIVE_NEWS,
+    USER_INFO,
+    MY_COURSE,
+    ALL_COURSE
 } from "./action-types";
 
 
@@ -42,7 +45,38 @@ function news(state = defaultNews,action) {
     }
 }
 
+//userinfo
+const initUserInfo = {userinfo:{}};
+function userInfo(state=initUserInfo,action) {
+    if (action.type === USER_INFO) {
+        return{...state,userinfo:action.data};
+    } else {
+        return state
+    }
+}
+
+//my_course
+const initMyCourse ={mycourse:[]};
+function myCourse(state=initMyCourse,action) {
+    if (action.type === MY_COURSE) {
+        return{...state,mycourse:action.data}
+    }else {
+        return state
+    }
+}
+
+//all_course
+const initAllcourse = {allCourse:[]};
+function allCourse(state=initAllcourse,action) {
+    if (action.type===ALL_COURSE){
+        return{...state,allCourse:action.data}
+    }else {
+        return state
+    }
+}
+
+
 
 export default combineReducers({
-    user,news
+    user,news,userInfo,myCourse,allCourse
 })
