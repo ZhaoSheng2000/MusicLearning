@@ -1,10 +1,9 @@
 import React from 'react'
 import {Route, Switch} from "react-router-dom";
-import {Layout, Menu, Button, notification, Badge} from 'antd';
+import {Layout, Menu, } from 'antd';
 import {
     DesktopOutlined,
     PieChartOutlined,
-    CommentOutlined,
     TeamOutlined,
     EditOutlined,
     NotificationOutlined,
@@ -34,25 +33,7 @@ const {SubMenu} = Menu
 export default class Teacher extends React.Component {
 
     componentDidMount() {
-        const key = `open${Date.now()}`;
-        const btn = (
-            <Button type="primary" size="small" onClick={() => notification.close(key)}>
-                详情
-            </Button>
-        );
-        const close = () => {
-            console.log(
-                'Notification was closed. Either the close button was clicked or duration time elapsed.',
-            );
-        };
-        notification.open({
-            message: 'Notification Title',
-            description:
-                'A function will be be called after the notification is closed (automatically after the "duration" time of manually).',
-            btn,
-            key,
-            onClose: close,
-        });
+
     }
 
     state = {};
@@ -84,12 +65,6 @@ export default class Teacher extends React.Component {
                                     <span>上课记录</span>
                                 </a>
                             </Menu.Item>
-                            <Menu.Item key="3">
-                                <a href={'/#/teacherPage/classFeedback'}>
-                                    <CommentOutlined/>
-                                    <span>课下反馈</span>
-                                </a>
-                            </Menu.Item>
                             <SubMenu
                                 key="sub2"
                                 title={
@@ -102,8 +77,6 @@ export default class Teacher extends React.Component {
                                 <Menu.Item key="4">
                                     <a href={'/#/teacherPage/courseData'}>上课次数</a>
                                 </Menu.Item>
-                                <Menu.Item key="5">出勤率</Menu.Item>
-                                <Menu.Item key="6">请假率</Menu.Item>
                             </SubMenu>
                             <Menu.Item key="7">
                                 <a href={'/#/teacherPage/classComment'}>
@@ -113,10 +86,9 @@ export default class Teacher extends React.Component {
                             </Menu.Item>
                             <Menu.Item key="8">
                                 <a href={'/#/teacherPage/notice'}>
-                                    <Badge dot={true}>
+
                                         <NotificationOutlined/>
                                         <span>消息通知</span>
-                                    </Badge>
                                 </a>
                             </Menu.Item>
                             <Menu.Item key="9">
@@ -147,7 +119,7 @@ export default class Teacher extends React.Component {
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>
-                        <Footer style={{textAlign: 'center'}}>Music Learning ©2020 Created by Zhao Sheng</Footer>
+                        <Footer style={{textAlign: 'center'}}>Music Learning ©2020 </Footer>
                     </Layout>
                 </Layout>
             </div>

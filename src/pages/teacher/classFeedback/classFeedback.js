@@ -1,32 +1,28 @@
 import React from 'react'
+import {connect} from 'react-redux'
+
 import {Card, Col, Row, Typography} from "antd";
 
 const { Paragraph } = Typography;
 
-export default class ClassFeedback extends React.Component {
+ class ClassFeedback extends React.Component {
 
     state = {question:[1,2,3,4,5,6,7,8,9,10]};
 
-    onDetail=()=>{
-      this.props.history.push('/teacherPage/feedbackDetail')
-    };
     render() {
+        const {feedBack} = this.props.feedBack
         return (
             <div>
                 <Row gutter={[12,12]}>
                     {
-                        this.state.question.map((name,index)=>{
+                        feedBack.map((feedBack,index)=>{
                             return(
                                 <Col span={22} key={index}>
                                     <Card
-                                        title={`问题${name}`}
+                                        title={feedBack.feedback}
                                         size={"small"}
-                                        hoverable
-                                        extra={'2020-01-01'}
-                                        onClick={this.onDetail}
                                     >
-                                        <Paragraph type={"warning"}>来自学生{name}</Paragraph>
-                                        休息休息？
+                                        {feedBack.feedback }
                                     </Card>
                                 </Col>
                             )
@@ -39,3 +35,6 @@ export default class ClassFeedback extends React.Component {
         )
     }
 }
+export default connect(
+    state =>({feedBack: state.feedBack})
+)(ClassFeedback)

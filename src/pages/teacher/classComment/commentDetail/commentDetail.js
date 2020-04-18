@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Breadcrumb, Card, List, Avatar} from "antd";
 
 const data = [
@@ -15,11 +16,13 @@ const data = [
         title: 'Ant Design Title 4',
     },
 ];
-export default class CommentDetail extends React.Component {
+class CommentDetail extends React.Component {
 
     state = {};
 
     render() {
+        const {courseReview} = this.props.courseReview
+        console.log(courseReview);
         return (
             <div>
                 <Breadcrumb style={{margin: '12px 0'}}>
@@ -29,15 +32,14 @@ export default class CommentDetail extends React.Component {
                 <Card>
                     <List
                         itemLayout="horizontal"
-                        dataSource={data}
+                        dataSource={courseReview}
                         renderItem={item => (
                             <List.Item
-                                actions={[<a href={'/'}>删除</a>]}
                             >
                                 <List.Item.Meta
                                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                    title={<a href="https://ant.design">{item.title}</a>}
-                                    description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                    title={item.stu_id}
+                                    description={item.evaluation}
                                 />
                             </List.Item>
                         )}
@@ -47,3 +49,7 @@ export default class CommentDetail extends React.Component {
         )
     }
 }
+
+export default connect(
+    state=>({courseReview:state.courseReview})
+)(CommentDetail)

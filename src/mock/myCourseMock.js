@@ -11,7 +11,9 @@ export default Mock.mock('/stu/selectAllCourse', 'post',{
             "course_start_time": "2020-03-01",
             "course_title": "数据库",
             "course_types_id": 1,
-            "id": 1
+            "id": 1,
+            "teausername":"@cname",
+            "img":"@image('230x130','#363b40','myCourse')"
         }
     ]
 } )

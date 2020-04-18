@@ -4,11 +4,16 @@ import {Carousel, Row, Col, Card, Typography, BackTop, Pagination} from 'antd';
 
 import './allcourse.less'
 
+import {receiveAllCourse,receivedCourseDetail,receivedCoureReview} from "../../redux/actions";
+
 const {Title} = Typography;
 const {Meta} = Card;
 
 
 class allCourse extends React.Component {
+    componentDidMount() {
+        this.props.receiveAllCourse();
+    }
 
     state = {
         course: [1, 2, 3, 4, 5, 6],
@@ -18,12 +23,16 @@ class allCourse extends React.Component {
     onChange = (pageNumber)=> {
         console.log('Page: ', pageNumber);
     }
-    onCourseDetail=()=>{
+    onCourseDetail=(class_teacher,id)=>{
+        this.props.receivedCourseDetail(id);
+        this.props.receivedCoureReview(id,class_teacher);
         this.props.history.push('/courseDetail')
     }
 
     render() {
-        console.log(this.props)
+        const {allCourse} = this.props.allCourse;
+        console.log(allCourse);
+
         return (
             <div>
                 <Carousel autoplay>
@@ -46,15 +55,15 @@ class allCourse extends React.Component {
                 </div>
                 <Row gutter={12}>
                     {
-                        this.state.course.map((course, index) => {
+                        allCourse.slice(0,6).map((course, index) => {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
-                                        onClick={this.onCourseDetail}
+                                        onClick={()=>this.onCourseDetail(course.class_teacher,course.id)}
                                         hoverable
-                                        cover={<img alt="example" src="https://s1.ax1x.com/2020/03/30/GmzF8x.jpg"/>}
+                                        cover={<img alt="example" src={course.img}/>}
                                     >
-                                        <Meta title="XXXXX课程" description={`课程${course}简介`}/>
+                                        <Meta title={course.course_title} description={course.course_content}/>
                                     </Card>
                                 </Col>
                             )
@@ -67,14 +76,15 @@ class allCourse extends React.Component {
                 </div>
                 <Row gutter={[16, 16]}>
                     {
-                        this.state.allcourse.map((course, index) => {
+                        allCourse.map((course, index) => {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
+                                        onClick={()=>this.onCourseDetail(course.class_teacher,course.id)}
                                         hoverable
-                                        cover={<img alt="example" src="https://s1.ax1x.com/2020/03/31/GMW6IS.jpg"/>}
+                                        cover={<img alt="example" src={course.img}/>}
                                     >
-                                        <Meta title="XXXXX课程" description={`课程${course}简介`}/>
+                                        <Meta title={course.course_title} description={course.course_content}/>
                                     </Card>
                                 </Col>
                             )
@@ -90,5 +100,5 @@ class allCourse extends React.Component {
     }
 }
 export default connect(
-    state =>({news:state.news})
+    state =>({allCourse:state.allCourse}),{receiveAllCourse,receivedCourseDetail,receivedCoureReview}
 )(allCourse)

@@ -1,60 +1,48 @@
 import React from 'react'
-import {Col, Row, Typography, Breadcrumb, Button, Tabs, Card, Avatar,List,Modal,TimePicker} from "antd";
+import {connect} from 'react-redux'
+import {Col, Row, Typography, Breadcrumb, Button, Tabs, Card, Avatar,List,message} from "antd";
 
 import {
     RadarChartOutlined,
     InfoCircleOutlined
 } from '@ant-design/icons';
 
+import {receivedTheTeacher,receivedTeacherCourse} from "../../redux/actions";
+import Cookies from 'js-cookie';
+
+import {reqaddCourse} from "../../../api";
+
 const {Title, Text,Paragraph} = Typography;
 const {TabPane} = Tabs;
-const { RangePicker } = TimePicker;
 
-const data = [
-    {
-        title: 'Ant Design Title 1',
-    },
-    {
-        title: 'Ant Design Title 2',
-    },
-    {
-        title: 'Ant Design Title 3',
-    },
-    {
-        title: 'Ant Design Title 4',
-    },
-];
 
-export default class CourseDetail extends React.Component {
+class CourseDetail extends React.Component {
 
     state = {
-        visible: false,
-        value:[],
+
     };
-    showModal = () => {
-        this.setState({
-            visible: true,
-        });
+    onConfirm=(id,class_teacher)=>{
+        const stu_id = Cookies.get("userId");
+        reqaddCourse(id,class_teacher,stu_id).then(r=>{
+            if(r.data.error_code===3005){
+                message.success('参加课程成功！');
+            }
+        })
     };
-    handleOk = e => {
-        this.setState({
-            visible: false,
-        });
-    };
-    handleCancel = e => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
-    onChange = time => {
-        console.log(time);
-        this.setState({value:time})
-    };
-    //function(dates: [moment, moment], dateStrings: [string, string])
+
+    onTeacherDetail=(id)=>{
+        this.props.receivedTheTeacher(id);
+        this.props.receivedTeacherCourse(id);
+        this.props.history.push('/teacherDetail')
+
+}
+
 
     render() {
-        const format = 'HH:mm';
+        const {courseDetail} = this.props.courseDetail;
+        const {courseReview} = this.props.courseReview;
+        console.log(courseDetail);
+
         return (
             <div>
                 <div style={{paddingLeft: 30, backgroundColor: "white", height: 400}}>
@@ -69,29 +57,17 @@ export default class CourseDetail extends React.Component {
                             <img alt="course" src="https://s1.ax1x.com/2020/04/02/GYYhPs.jpg"/>
                         </Col>
                         <Col span={12}>
-                            <Title level={3}>玩转流行音乐——多种音乐风格轻松学</Title>
-                            <Text type="secondary">开课时间：2020/01/11——2020/07/01</Text>
-                            <br/>
-                            <Text type="secondary">学时安排：1-2小时/周</Text>
+                            <Title level={3}>{courseDetail.course_title}</Title>
+                            <Text type="secondary">开课时间：{courseDetail.course_start_time}——{courseDetail.course_end_time}</Text>
                             <br/>
                             <br/>
                             <br/>
                             <br/>
-                            <Text type="warning">已有234人参加</Text>
+                            <br/>
+                            <Text type="warning">已有{courseDetail.signin}人参加</Text>
                             <br/>
                             <br/>
-                            <Button type="primary" size={"large"} onClick={this.showModal}>立即参加</Button>
-                            <Modal
-                                title="选择上课时间"
-                                visible={this.state.visible}
-                                onOk={this.handleOk}
-                                onCancel={this.handleCancel}
-                            >
-                                <div>
-                                    <RangePicker value={this.state.value} format={format} minuteStep={10} onChange={this.onChange}>
-                                    </RangePicker>
-                                </div>
-                            </Modal>
+                            <Button type="primary" size={"large"} onClick={()=>this.onConfirm(courseDetail.id,courseDetail.class_teacher)}>立即参加</Button>
                         </Col>
                     </Row>
                 </div>
@@ -104,7 +80,7 @@ export default class CourseDetail extends React.Component {
                                     <TabPane tab="课程详情" key="1">
                                         <Card style={{backgroundColor:"beige"}}>
                                             <Text>
-                                                这门课勾勒出流行音乐的风格地形图，各种重要风格悉数登场。著名音乐人用他们的手指和歌喉，对流行音乐“开膛破肚”，在显微镜下透视其组成部件和内脏器官，告诉你它之所以是这样而不是那样一种风格的原因；还会教你如何写歌写词，如何唱歌弹琴和编曲。快！一起“玩转”流行音乐吧。
+                                                {courseDetail.course_content}
                                             </Text>
                                         </Card>
                                         <br/>
@@ -152,16 +128,15 @@ export default class CourseDetail extends React.Component {
                                         </p>
 
                                     </TabPane>
-                                    <TabPane tab="课程评价 (19)" key="2">
+                                    <TabPane tab={`课程评价 ${courseReview.length} `} key="2">
                                         <List
                                             itemLayout="horizontal"
-                                            dataSource={data}
+                                            dataSource={courseReview}
                                             renderItem={item => (
                                                 <List.Item>
                                                     <List.Item.Meta
                                                         avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                                        title={<a href="https://ant.design">{item.title}</a>}
-                                                        description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                                        description={item.evaluation}
                                                     />
                                                 </List.Item>
                                             )}
@@ -172,10 +147,10 @@ export default class CourseDetail extends React.Component {
                         </Col>
                         <Col span={6}>
                             <Card title="授课老师" bordered={false}>
-                                <a href={'/#/teacherDetail'}>
+                                <a onClick={()=>this.onTeacherDetail(courseDetail.class_teacher)}>
                                     <Avatar size={64}
                                             src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
-                                    ZZULI
+                                    {courseDetail.teausername}
                                 </a>
                             </Card>
                         </Col>
@@ -185,3 +160,6 @@ export default class CourseDetail extends React.Component {
         )
     }
 }
+export default connect(
+    state=>({courseDetail: state.courseDetail,courseReview: state.courseReview}),{receivedTheTeacher,receivedTeacherCourse}
+)(CourseDetail)

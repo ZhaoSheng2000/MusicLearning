@@ -1,23 +1,38 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Statistic, Row, Col, Card, Typography, Progress, Button} from 'antd';
+import Cookies from 'js-cookie'
+
+import {receivedTeacherCourse,receivedStuList,receivedFeedback} from "../../redux/actions";
 
 const {Title, Text} = Typography;
 
-export default class ClassRecord extends React.Component {
+class ClassRecord extends React.Component {
 
     state = {course: [1, 2, 3, 4, 5, 6, 7]};
+    componentDidMount() {
+        const id = Cookies.get("userId");
+        this.props.receivedTeacherCourse(id);
+    }
 
-    onDetail=()=>{
-        this.props.history.push('/teacherPage/recordDetail')
+    onDetail=(id,class_teacher)=>{
+        this.props.receivedStuList(id,class_teacher);
+        this.props.history.push('/teacherPage/recordDetail');
+    }
+    onFeedback=(id,class_teacher)=>{
+        this.props.receivedFeedback(id,class_teacher);
+        this.props.history.push('/teacherPage/classFeedback')
     }
 
     render() {
+        const{teacherCourse} = this.props.teacherCourse;
+        console.log(teacherCourse);
         return (
             <div>
                 <Card>
                     <Row gutter={16}>
                         <Col span={8}>
-                            <Statistic title="我的课程" value={8} suffix={' 个'}/>
+                            <Statistic title="我的课程" value={teacherCourse.length} suffix={' 个'}/>
                         </Col>
                         <Col span={8}>
                             <Statistic title="待处理课程" value={3} suffix={'个'}/>
@@ -31,15 +46,15 @@ export default class ClassRecord extends React.Component {
                 <Row gutter={[16, 16]}>
                     <Col span={22}>
                         {
-                            this.state.course.map((name, index) => {
+                            teacherCourse.map((name, index) => {
                                 return (
-                                    <Card hoverable key={index}>
+                                    <Card  key={index}>
                                         <Row gutter={16}>
                                             <Col span={8}>
                                                 <img alt='course' src="https://s1.ax1x.com/2020/03/31/GMW6IS.jpg"/>
                                             </Col>
                                             <Col span={8}>
-                                                <Title level={4}>XXX{name}课程</Title>
+                                                <Title level={4}>{name.course_title}</Title>
                                                 <br/>
                                                 <br/>
                                                 <Text>已上课时</Text><br/>
@@ -48,13 +63,15 @@ export default class ClassRecord extends React.Component {
                                             <Col span={8}>
                                                 <Title level={4}>上课时间</Title>
                                                 <Text type={"warning"}>
-                                                    周一至周五14：00--16：00
+                                                    {name.course_start_time}——{name.course_end_time}
                                                 </Text>
                                                 <br/>
                                                 <br/>
                                                 <br/>
                                                 <div>
-                                                    <Button type={"primary"} onClick={this.onDetail}>编辑上课记录</Button>
+                                                    <Button type={"primary"} onClick={()=>this.onDetail(name.id,name.class_teacher)}>编辑上课记录</Button>
+                                                    &nbsp;&nbsp;
+                                                    <Button type={"primary"} onClick={()=>this.onFeedback(name.id,name.class_teacher)}>查看课下反馈</Button>
                                                 </div>
                                             </Col>
                                         </Row>
@@ -70,3 +87,6 @@ export default class ClassRecord extends React.Component {
         )
     }
 }
+export default connect(
+    state=>({teacherCourse:state.teacherCourse}),{receivedTeacherCourse,receivedStuList,receivedFeedback}
+)(ClassRecord)

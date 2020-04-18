@@ -1,24 +1,142 @@
 import React from 'react'
-import {Avatar, Typography, Statistic, Card, Progress, Button,Col, Row} from 'antd';
+import {connect} from 'react-redux'
+import {Avatar, Typography, Statistic, Card, Button,Col, Row, Modal, Input,message} from 'antd';
 import {
-    LikeOutlined,
     ClockCircleOutlined,
     CommentOutlined
 } from '@ant-design/icons';
 
+import {userInfo,receiveMyCourse} from "../../redux/actions";
+
 import './personal.less'
+import Cookies from "js-cookie";
+import axios from 'axios'
+import "../../../mock/feedbackMock";
+import "../../../mock/addEvaluationMock";
 
-
+const { TextArea } = Input;
 const {Title, Paragraph, Text} = Typography;
 
 
-export default class Personal extends React.Component {
+class Personal extends React.Component {
 
     state = {
-        course:[1,2,3,4,5,6]
+        course:[1,2,3,4,5,6],
+        visible: false,
+        confirmLoading: false,
+        confirmLoading2:false,
+        visible2:false,
+        value: '',
+        value2: '',
+
+    };
+    componentDidMount() {
+        const userId = Cookies.get("userId");
+        this.props.userInfo(userId);
+        this.props.receiveMyCourse(userId);
+    }
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+    showModal2 = () => {
+        this.setState({
+            visible2: true,
+        });
     };
 
+    handleOk = (course_id,tea_id) => {
+        this.setState({
+            confirmLoading: true,
+        });
+        const {value} = this.state;
+        const userId = Cookies.get("userId");
+        if (value===''){
+            message.warning('问题不能为空！');
+            this.setState({
+                visible: false,
+                confirmLoading: false,
+            });
+        }
+        else {
+            axios.post('/stu/addFeedback', {
+                course_id:String(course_id),
+                tea_id:String(tea_id),
+                stu_id:userId,
+                feedback:value
+            }).then(r=>{
+                if (r.data.error_code===3007){
+                    this.setState({
+                        visible: false,
+                        confirmLoading: false,
+                    });
+                    message.success('提问成功！')
+                }
+            })
+
+        }
+    };
+
+    handleOk2 = (course_id,tea_id) => {
+        this.setState({
+            confirmLoading2: true,
+        });
+        const {value2} = this.state;
+        const userId = Cookies.get("userId");
+        if (value2===''){
+            message.warning('评价不能为空！');
+            this.setState({
+                visible2: false,
+                confirmLoading2: false,
+            });
+        }
+        else {
+            axios.post('/stu/addEvaluation', {
+                course_id:String(course_id),
+                tea_id:String(tea_id),
+                stu_id:userId,
+                addEvaluation:value2
+            }).then(r=>{
+                if (r.data.error_code===3007){
+                    this.setState({
+                        visible2: false,
+                        confirmLoading2: false,
+                    });
+                    message.success('添加课程评价成功！')
+                }
+            })
+
+        }
+    };
+
+
+    handleCancel = () => {
+        console.log('Clicked cancel button');
+        this.setState({
+            visible: false,
+        });
+    };
+    handleCancel2 = () => {
+        console.log('Clicked cancel button');
+        this.setState({
+            visible2: false,
+        });
+    };
+
+    onChange = ({ target: { value } }) => {
+        this.setState({ value });
+    };
+
+    onChange2 = ({ target: { value } }) => {
+        this.setState({ value2:value });
+    };
     render() {
+        const { visible, confirmLoading,value ,confirmLoading2,visible2,value2} = this.state;
+
+        const {userinfo} = this.props.userinfo;
+        const myCourse = this.props.myCourse.mycourse;
+
         return (
             <div>
                 <div className='top-bg'>
@@ -31,7 +149,7 @@ export default class Personal extends React.Component {
                         </Col>
                         <Col span={10}>
                             <div style={{paddingTop: 30}}>
-                                <Title level={3} style={{color: "white"}}>赵盛</Title>
+                                <Title level={3} style={{color: "white"}}>{userinfo.nickname}</Title>
                             </div>
                         </Col>
                         <Col span={3}>
@@ -44,14 +162,7 @@ export default class Personal extends React.Component {
                         <Col span={3}>
                             <div style={{paddingTop: 10}}>
                                 <Statistic valueStyle={{color: "white"}}
-                                           title={<Title level={4} style={{color: "white"}}>点赞</Title>} value={1128}
-                                           prefix={<LikeOutlined/>}/>
-                            </div>
-                        </Col>
-                        <Col span={3}>
-                            <div style={{paddingTop: 10}}>
-                                <Statistic valueStyle={{color: "white"}}
-                                           title={<Title level={4} style={{color: "white"}}>学习进度</Title>} value={"93%"}
+                                           title={<Title level={4} style={{color: "white"}}>学习进度</Title>} value={"83%"}
                                            prefix={<ClockCircleOutlined/>}/>
                             </div>
                         </Col>
@@ -63,32 +174,60 @@ export default class Personal extends React.Component {
                     <Row>
                         <Col span={18}>
                             {
-                                this.state.course.map((name,index)=>{
+                                myCourse.map((name,index)=>{
                                     return(
-                                        <Card hoverable key={index}>
+                                        <Card  key={index}>
                                             <Row gutter={16}>
                                                 <Col span={8}>
-                                                    <img alt='course' src="https://s1.ax1x.com/2020/03/31/GMW6IS.jpg"/>
+                                                    <img alt='course' src={name.img}/>
                                                 </Col>
                                                 <Col span={8}>
-                                                    <Title level={4}>XXX{name}课程</Title>
+                                                    <Title level={4}>{name.course_content}课程</Title>
+                                                    <br/>
                                                     <Paragraph>
-                                                        XXX老师
+                                                        {name.teausername}老师
                                                     </Paragraph>
-                                                    <Text>已学课时</Text><br/>
-                                                    <Progress style={{width:200}} percent={80} />
                                                 </Col>
                                                 <Col span={8}>
                                                     <Title level={4}>上课时间</Title>
                                                     <Text type={"warning"}>
-                                                        周一至周五14：00--16：00
+                                                        {name.course_start_time}——
+                                                        {name.course_end_time}
                                                     </Text>
                                                     <br/>
                                                     <br/>
-                                                    <br/>
                                                     <div>
-                                                        <Button type={"primary"}>提问老师</Button>&nbsp;
-                                                        <Button type={"primary"}>评价课程</Button>
+                                                        <Button type={"primary"} onClick={this.showModal}>提问老师</Button>&nbsp;
+                                                        <Button type={"primary"} onClick={this.showModal2}>评价课程</Button>
+                                                        <Modal
+                                                            title="提问老师"
+                                                            visible={visible}
+                                                            onOk={()=>this.handleOk(name.id,name.class_teacher)}
+                                                            confirmLoading={confirmLoading}
+                                                            onCancel={this.handleCancel}
+                                                        >
+                                                            <TextArea
+                                                                value={value}
+                                                                onChange={this.onChange}
+                                                                placeholder="请输入您的问题"
+                                                                autoSize={{ minRows: 3, maxRows: 5 }}
+                                                            />
+                                                        </Modal>
+
+                                                        <Modal
+                                                            title="评价课程"
+                                                            visible={visible2}
+                                                            onOk={()=>this.handleOk2(name.id,name.class_teacher)}
+                                                            confirmLoading={confirmLoading2}
+                                                            onCancel={this.handleCancel2}
+                                                        >
+                                                            <TextArea
+                                                                value={value2}
+                                                                onChange={this.onChange2}
+                                                                placeholder="请输入您的评价"
+                                                                autoSize={{ minRows: 3, maxRows: 5 }}
+                                                            />
+                                                        </Modal>
                                                     </div>
                                                 </Col>
                                             </Row>
@@ -105,3 +244,7 @@ export default class Personal extends React.Component {
         )
     }
 }
+export default connect(
+    state=>({myCourse: state.myCourse,userinfo: state.userInfo}),
+    {userInfo,receiveMyCourse}
+)(Personal)

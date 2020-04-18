@@ -2,6 +2,7 @@ import React from 'react'
 import {Layout, Menu,Input} from 'antd';
 import {Route, Switch} from "react-router-dom";
 import './student.less'
+import Cookies from 'js-cookie'
 import {
     LogoutOutlined,
     UserOutlined,
@@ -20,7 +21,7 @@ import InformationDetail from "../informationDetail/informationDetail";
 import Discuss from "../discuss/discuss";
 import DiscussDetail from "../discussDetail/discussDetail";
 import Personal from "../personal/personal";
-import UserInfo from "../userInfo/userInfo";
+import ChangeUserInfo from "../userInfo/changeUserInfo";
 
 const {Header, Content, Footer} = Layout;
 const {SubMenu} = Menu;
@@ -33,7 +34,10 @@ export default class student extends React.Component {
         collapsed: false,
 
     };
-
+    onQuit=()=>{
+        Cookies.remove('userId');
+        this.props.history.push('/login')
+    }
 
     render() {
         return (
@@ -60,8 +64,8 @@ export default class student extends React.Component {
                                 />
                             }/>
                             <SubMenu title="我的" className="geren">
-                                <Menu.Item> <a href={'/#/user'}><UserOutlined/>我的资料</a> </Menu.Item>
-                                <Menu.Item><LogoutOutlined/>退出登录</Menu.Item>
+                                <Menu.Item> <a href={'/#/changeuser'}><UserOutlined/>我的资料</a> </Menu.Item>
+                                <Menu.Item><a onClick={this.onQuit}><LogoutOutlined/>退出登录</a> </Menu.Item>
                             </SubMenu>
                             <Menu.Item key="4" className="geren"><a href={'/#/personal'}>个人中心</a></Menu.Item>
                         </Menu>
@@ -76,11 +80,11 @@ export default class student extends React.Component {
                                 <Route path={'/discuss'} component={Discuss}/>
                                 <Route path={'/discussDetail'} component={DiscussDetail}/>
                                 <Route path={'/personal'} component={Personal}/>
-                                <Route path={'/user'} component={UserInfo}/>
+                                <Route path={'/changeuser'} component={ChangeUserInfo}/>
                                 <Route  component={Home}/>
                             </Switch>
                     </Content>
-                    <Footer style={{textAlign: 'center'}}>Music Learning ©2020 Created by Zhao Sheng</Footer>
+                    <Footer style={{textAlign: 'center'}}>Music Learning ©2020</Footer>
                 </Layout>
             </div>
         )

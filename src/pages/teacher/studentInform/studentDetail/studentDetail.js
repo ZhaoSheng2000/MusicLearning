@@ -52,13 +52,6 @@ export default class StudentDetail extends React.Component {
                     </Descriptions>
                     <br/>
                     <br/>
-                    <Descriptions title={'下个信息组'}>
-                        <Descriptions.Item label="某某数据">XXXX</Descriptions.Item>
-                        <Descriptions.Item label="数据1">118</Descriptions.Item>
-                        <Descriptions.Item label="数据2">126</Descriptions.Item>
-                        <Descriptions.Item label="数据3">222</Descriptions.Item>
-                        <Descriptions.Item label="数据更新时间">2020-02-19</Descriptions.Item>
-                    </Descriptions>
 
                 </Card>
 

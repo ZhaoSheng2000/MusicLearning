@@ -1,15 +1,23 @@
 import React from 'react'
 import {Card, Col, Row, Pagination} from "antd";
 
+import {reqNotice} from "../../../api";
 
 export default class Notice extends React.Component {
 
     state = {
         inform:[1,2,3,4,5,6,7,8,9,10,]
     };
-    onDetail=()=>{
-        this.props.history.push('/teacherPage/noticeDetail')
-    }
+    componentDidMount() {
+        reqNotice(2).then(r =>{
+            console.log(r.data);
+            if (r.data.error_code===4009){
+                this.setState({
+                    inform:r.data.data
+                })
+            }
+        } )
+    };
 
     render() {
         return (
@@ -20,14 +28,12 @@ export default class Notice extends React.Component {
                             return(
                                 <Col span={23} key={index}>
                                     <Card
-                                        onClick={this.onDetail}
-                                        title={`通知${name}`}
+                                        title={name.title}
                                         size={"small"}
-                                        extra={'2020-2-13 09:00'}
-                                        hoverable
+                                        extra={name.time}
                                         style={{height:100}}
                                     >
-                                        发件人：admin
+                                        {name.intro}
                                     </Card>
                                 </Col>
                             )

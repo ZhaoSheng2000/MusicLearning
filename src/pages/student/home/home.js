@@ -5,7 +5,7 @@ import {UserOutlined} from '@ant-design/icons';
 import Cookies from "js-cookie"
 
 
-import {receiveNew, userInfo, receiveMyCourse, receiveAllCourse} from "../../redux/actions";
+import {receiveNew, userInfo, receiveMyCourse, receiveAllCourse,receiveAllDiscuss,receiveTheNews} from "../../redux/actions";
 import './home.less'
 
 const {Title} = Typography;
@@ -28,17 +28,19 @@ class Home extends React.Component {
         this.props.userInfo(userId);
         this.props.receiveMyCourse(userId);
         this.props.receiveAllCourse();
+        this.props.receiveAllDiscuss();
 
     }
 
     onCourseDetail = () => {
         this.props.history.push('/courseDetail')
     };
-    onInformationDetail = () => {
+    onInformationDetail = (id) => {
+        this.props.receiveTheNews(id);
         this.props.history.push('/information')
     }
     onQuestion = () => {
-        this.props.history.push('/discussDetail')
+        this.props.history.push(`/discussDetail`)
     }
     onPersonal = () => {
         this.props.history.push('/personal')
@@ -46,12 +48,11 @@ class Home extends React.Component {
 
     render() {
         const {news} = this.props.news;
-        const {userinfo} = this.props.userinfo
-        const myCourse = this.props.myCourse.mycourse
-        const allCourse = this.props.allCourse
-        console.log(allCourse)
-
-
+        const {userinfo} = this.props.userinfo;
+        const myCourse = this.props.myCourse.mycourse;
+        const {allCourse} = this.props.allCourse;
+        const {allDiscuss} = this.props.allDiscuss;
+        console.log(allDiscuss)
         return (
             <div>
                 <Row gutter={12}>
@@ -102,7 +103,7 @@ class Home extends React.Component {
                             return (
                                 <Col span={6} key={index}>
                                     <Card
-                                        onClick={this.onInformationDetail}
+                                        onClick={()=>this.onInformationDetail(name.id)}
                                         hoverable
                                         style={{width: 300}}
                                         cover={<img alt="example" src={name.picture}/>}
@@ -119,16 +120,16 @@ class Home extends React.Component {
                 </div>
                 <Row gutter={16}>
                     {
-                        this.state.tuijian.map((name, index) => {
+                        allCourse.slice(0,4).map((name, index) => {
                             return (
                                 <Col span={6} key={index}>
                                     <Card
                                         onClick={this.onCourseDetail}
                                         hoverable
                                         style={{width: 300}}
-                                        cover={<img alt="example" src="https://s1.ax1x.com/2020/03/30/GmzF8x.jpg"/>}
+                                        cover={<img alt="example" src={name.img}/>}
                                     >
-                                        <Meta title={`课程${name}`} description="简介简介。。。。。。。简介"/>
+                                        <Meta title={name.course_title} description={name.course_content}/>
                                     </Card>
                                 </Col>
                             )
@@ -146,22 +147,20 @@ class Home extends React.Component {
                             <h2 className='mystudy'>一起学习，一起成长</h2>
                             <h4 className='mystudy'>已有1000万学生在此发言讨论</h4>
                         </Col>
-                        <Col span={8}>
-                            <div className='discussCard'>
-                                <Card title="XX老师 XX课程" hoverable style={{height: 200}} onClick={this.onQuestion}>
-                                    <Title level={4}>问题问。。。。。。。。。？</Title>
-                                    <p style={{position: "absolute", bottom: 0}}>已有234人参与讨论</p>
-                                </Card>
-                            </div>
-                        </Col>
-                        <Col span={8}>
-                            <div className='discussCard'>
-                                <Card title="XX老师 XX课程" hoverable style={{height: 200}} onClick={this.onQuestion}>
-                                    <Title level={4}>问题。。。。。。。。。？</Title>
-                                    <p style={{position: "absolute", bottom: 0}}>已有234人参与讨论</p>
-                                </Card>
-                            </div>
-                        </Col>
+                        {
+                            allDiscuss.slice(0,2).map((name,index)=>{
+                                return(
+                                    <Col span={8} key={index}>
+                                        <div className='discussCard'>
+                                            <Card title={`来自${name.coursename} ${name.teausername}老师`} hoverable style={{height: 200}} onClick={this.onQuestion}>
+                                                <Title level={4}>{name.problem}</Title>
+                                                <p style={{position: "absolute", bottom: 0}}>已有234人参与讨论</p>
+                                            </Card>
+                                        </div>
+                                    </Col>
+                                )
+                            })
+                        }
                     </Row>
                 </div>
 
@@ -170,15 +169,15 @@ class Home extends React.Component {
                 </div>
                 <Row gutter={[16, 16]}>
                     {
-                        this.state.yinyue.map((name, index) => {
+                        allCourse.map((name, index) => {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
                                         onClick={this.onCourseDetail}
                                         hoverable
-                                        cover={<img alt="example" src="https://s1.ax1x.com/2020/03/30/GnDSI0.png"/>}
+                                        cover={<img alt="example" src={name.img}/>}
                                     >
-                                        <Meta title={name} description="简介简介简介"/>
+                                        <Meta title={name.course_title} description={name.course_content}/>
                                     </Card>
                                 </Col>
                             )
@@ -191,16 +190,15 @@ class Home extends React.Component {
                 </div>
                 <Row gutter={[16, 16]}>
                     {
-                        this.state.yinyue.map((name, index) => {
+                        allCourse.map((name, index) => {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
                                         onClick={this.onCourseDetail}
-                                        key={index}
                                         hoverable
-                                        cover={<img alt="example" src="https://s1.ax1x.com/2020/03/30/GnsIaR.png"/>}
+                                        cover={<img alt="example" src={name.img}/>}
                                     >
-                                        <Meta title={name} description="简介简介简介"/>
+                                        <Meta title={name.course_title} description={name.course_content}/>
                                     </Card>
                                 </Col>
                             )
@@ -213,16 +211,15 @@ class Home extends React.Component {
                 </div>
                 <Row gutter={[16, 16]}>
                     {
-                        this.state.yinyue.map((name, index) => {
+                        allCourse.map((name, index) => {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
                                         onClick={this.onCourseDetail}
-                                        key={index}
                                         hoverable
-                                        cover={<img alt="example" src="https://s1.ax1x.com/2020/03/31/GKp0Df.png"/>}
+                                        cover={<img alt="example" src={name.img}/>}
                                     >
-                                        <Meta title={name} description="简介简介简介"/>
+                                        <Meta title={name.course_title} description={name.course_content}/>
                                     </Card>
                                 </Col>
                             )
@@ -235,16 +232,15 @@ class Home extends React.Component {
                 </div>
                 <Row gutter={[16, 16]}>
                     {
-                        this.state.yinyue.map((name, index) => {
+                        allCourse.map((name, index) => {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
                                         onClick={this.onCourseDetail}
-                                        key={index}
                                         hoverable
-                                        cover={<img alt="example" src="https://s1.ax1x.com/2020/03/31/GKpg8s.png"/>}
+                                        cover={<img alt="example" src={name.img}/>}
                                     >
-                                        <Meta title={name} description="简介简介简介"/>
+                                        <Meta title={name.course_title} description={name.course_content}/>
                                     </Card>
                                 </Col>
                             )
@@ -310,8 +306,9 @@ export default connect(
         user: state.user,
         userinfo: state.userInfo,
         myCourse: state.myCourse,
-        allCourse:state.allCourse
-    }), {receiveNew, userInfo, receiveMyCourse, receiveAllCourse})(Home);
+        allCourse:state.allCourse,
+        allDiscuss:state.allDiscuss
+    }), {receiveNew, userInfo, receiveMyCourse, receiveAllCourse,receiveAllDiscuss,receiveTheNews})(Home);
 
 
 

@@ -16,7 +16,6 @@ class Login extends React.Component {
     onFinish = (e) => {
         console.log(e);
         this.props.userLogin(e);
-        this.props.receiveNew();
         axios.post('/my/login', {
             username: e.username,
             password: e.password
@@ -76,7 +75,6 @@ class Login extends React.Component {
                             <Radio.Group value={this.state.identity}>
                                 <Radio value={1}>我是学生</Radio>
                                 <Radio value={2}>我是教师</Radio>
-                                <Radio value={3}>我是管理员</Radio>
                             </Radio.Group>
                         </Form.Item>
                         <Form.Item>

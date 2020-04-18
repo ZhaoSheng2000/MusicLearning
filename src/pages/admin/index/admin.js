@@ -77,7 +77,7 @@ export default class Admin extends React.Component {
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>
-                        <Footer style={{textAlign: 'center'}}>Music Learning ©2020 Created by Zhao Sheng</Footer>
+                        <Footer style={{textAlign: 'center'}}>Music Learning ©2020</Footer>
                     </Layout>
                 </Layout>
             </div>

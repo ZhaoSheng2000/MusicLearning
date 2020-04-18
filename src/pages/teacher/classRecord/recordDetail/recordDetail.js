@@ -1,9 +1,10 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Breadcrumb, Button, Card, Col, List, Row, Radio, Input} from "antd";
 
 
 
-export default class RecordDetail extends React.Component {
+class RecordDetail extends React.Component {
 
     state = {
         student: [{
@@ -25,6 +26,7 @@ export default class RecordDetail extends React.Component {
     };
 
     render() {
+        const {stuList} = this.props.stuList;
         return (
             <div>
                 <Breadcrumb style={{margin: '12px 0'}}>
@@ -55,11 +57,11 @@ export default class RecordDetail extends React.Component {
 
                         }
                         itemLayout="horizontal"
-                        dataSource={this.state.student}
+                        dataSource={stuList}
                         renderItem={item => (
                             <List.Item>
-                                <span>{item.title}</span>
-                                <Radio.Group name={item.title} defaultValue="a" size="small"
+                                <span>{item.nickname}</span>
+                                <Radio.Group name={item.nickname} defaultValue="a" size="small"
                                              onChange={(index) => console.log(index)}>
                                     <Radio.Button value="a">已到</Radio.Button>
                                     <Radio.Button value="c">迟到</Radio.Button>
@@ -68,7 +70,7 @@ export default class RecordDetail extends React.Component {
                                 </Radio.Group>
                                 <Input placeholder="备注"
                                        style={{width: 300}}
-                                       id={item.title}
+                                       id={item.id}
                                        onChange={e=>{
                                            console.log(e.target.id);
                                            let data = this.state.student;
@@ -91,3 +93,6 @@ export default class RecordDetail extends React.Component {
         )
     }
 }
+export default connect (
+    state=>({stuList:state.stuList})
+)(RecordDetail)

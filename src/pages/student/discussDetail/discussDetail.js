@@ -1,5 +1,7 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Card, Col, Row, Typography, List, Avatar, Divider, Comment, Form, Button, Input, Pagination} from "antd";
+import axios from "axios"
 
 const {Title, Paragraph, Text} = Typography;
 const { TextArea } = Input;
@@ -31,8 +33,12 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 );
 
 
+class DiscussDetail extends React.Component {
+    componentDidMount() {
+        const {theDiscuss} = this.props.theDiscuss;
+        console.log(theDiscuss)
 
-export default class DiscussDetail extends React.Component {
+    }
 
     state = {
         comments: [
@@ -119,7 +125,7 @@ export default class DiscussDetail extends React.Component {
 
     render() {
         const { comments, submitting, value } = this.state;
-
+        const {theDiscuss} = this.props.theDiscuss;
         return (
             <div>
                 <Row gutter={[16]}>
@@ -130,11 +136,10 @@ export default class DiscussDetail extends React.Component {
                                     <img alt='course' src="https://s1.ax1x.com/2020/03/31/GMW6IS.jpg"/>
                                 </Col>
                                 <Col span={16}>
-                                    <Title level={4}>XXX{}如何解决</Title>
+                                    <Title level={4}>{theDiscuss.content}</Title>
                                     <Paragraph>
-                                        同学们遇到XXXXXXXX？
+                                        {theDiscuss.content}
                                     </Paragraph>
-                                    <Text type="warning"> 来自XXXX{}课程</Text>
                                 </Col>
                             </Row>
                         </Card>
@@ -167,3 +172,5 @@ export default class DiscussDetail extends React.Component {
         )
     }
 }
+
+export default connect(stete=>({theDiscuss: stete.theDiscuss}))(DiscussDetail)
