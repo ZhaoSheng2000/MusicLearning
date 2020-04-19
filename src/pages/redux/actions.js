@@ -58,8 +58,9 @@ export const userLogin = (user) => {
     }
 };
 
-//ChangeUserInfo
+//getUserInfo
 const receivedUserInfo = (userInfo) => ({type: USER_INFO, data: userInfo});
+
 export const userInfo = (id) => {
     return async dispatch => {
         const response = await reqUserInfo(id);

@@ -36,6 +36,7 @@ class Home extends React.Component {
         this.props.history.push('/courseDetail')
     };
     onInformationDetail = (id) => {
+        console.log(typeof id)
         this.props.receiveTheNews(id);
         this.props.history.push('/information')
     }

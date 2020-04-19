@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Card, Col, Row, Typography, List, Avatar, Divider, Comment, Form, Button, Input, Pagination} from "antd";
-import axios from "axios"
 
 const {Title, Paragraph, Text} = Typography;
 const { TextArea } = Input;

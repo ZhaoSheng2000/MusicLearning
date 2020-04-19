@@ -29,54 +29,54 @@ export const reqLogin = ({username, password}) => axios.post('/my/login', {
 export const reqNews = () => axios.get('/notice/find');
 
 //获取用户信息
-export const reqUserInfo = (id) => axios.post('/stu/getAllThings', {id});
+export const reqUserInfo = (id) => axios.post('/stu/getAllThings', {id});//正确
 
 //获取所有课程
 export const reqAllCourse = () => axios.get('/stu/getAllCourse');
 
 
 //My_course
-export const reqMyCourse = (id) => axios.post('/stu/selectAllCourse', {stu_id: id});
+export const reqMyCourse = (id) => axios.post('/stu/selectAllCourse', {stu_id: id});//正确
 
 //all_discuss
 export const reqAllDiscuss = ()=> axios.get('/disc/select');
 
 //theNews
-export const reqTheNews = (id) =>axios.post('/notice/getContent',{id});
+export const reqTheNews = (id) =>axios.post('/notice/getContent',{id});//正确
 
 //the_discuss
-export const reqTheDiscuss =(dis_id) =>axios.post('/disc/getDisReplyByID',{dis_id});
+export const reqTheDiscuss =(dis_id) =>axios.post('/disc/getDisReplyByID',{dis_id});//正确
 
 //all_teacher
 export const reqAllTeacher = ()=>axios.get('/stu/getTeaList');
 
 //the_teacher
-export const reqTheTeacher = (id) =>axios.post('/stu/getTeaCon',{id});
+export const reqTheTeacher = (id) =>axios.post('/stu/getTeaCon',{id}); //正确
 
 //the_teacher_course
-export const reqteacherCourse = (tea_id) =>axios.post('/stu/getTeaCourse',{tea_id});
+export const reqteacherCourse = (tea_id) =>axios.post('/stu/getTeaCourse',{tea_id});//正确
 
 //course_detail
-export const reqcoureDetail = (id) =>axios.post('/stu/getCourseById',{id});
+export const reqcoureDetail = (id) =>axios.post('/stu/getCourseById',{id});//正确
 
 //course_review
-export const reqcourseReview = (course_id,tea_id)=>axios.post('/tea/stuEvaluation',{course_id,tea_id});
+export const reqcourseReview = (course_id,tea_id)=>axios.post('/tea/stuEvaluation',{course_id,tea_id});//zq
 
 //add_course
-export const reqaddCourse = (course_id,tea_id,stu_id) =>axios.post('/stu/addCourse',{course_id,tea_id,stu_id});
+export const reqaddCourse = (course_id,tea_id,stu_id) =>axios.post('/stu/addCourse',{course_id,tea_id,stu_id});//zq
 
 //update_user
-export const requpdateUser = (id,age,picture,nickname,email,phone) =>axios.post('/tea/changeBase',{id,age,picture,nickname,email,phone});
+export const requpdateUser = (id,age,picture,nickname,email,phone) =>axios.post('/tea/changeBase',{id,age,picture,nickname,email,phone});//zq
 
 
 //getChartMap
 export const reqchartMap = () =>axios.get('/chart/getChartMap');
 
 //getStuList
-export const reqstuList = (course_id,tea_id) =>axios.post('/stu/getCourseStuList',{course_id,tea_id});
+export const reqstuList = (course_id,tea_id) =>axios.post('/stu/getCourseStuList',{course_id,tea_id});//zq
 
 //查看反馈
-export const reqFeedback = (course_id,tea_id) =>axios.post('/tea/stuFeedback',{course_id,tea_id});
+export const reqFeedback = (course_id,tea_id) =>axios.post('/tea/stuFeedback',{course_id,tea_id});//zq
 
 //新建讨论
 export const reqNewDiscuss = (tea_id,problem,release_time,course_id)=>axios.post('/disc/addDiscus',{tea_id,problem,release_time,course_id})

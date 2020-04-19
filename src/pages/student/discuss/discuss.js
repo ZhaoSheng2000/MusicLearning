@@ -23,6 +23,7 @@ class Discuss extends React.Component {
 
     onDetail=(id)=>{
         this.props.receiveTheDiscuss(id);
+        console.log(typeof id);
         this.props.history.push('/discussDetail');
     };
 

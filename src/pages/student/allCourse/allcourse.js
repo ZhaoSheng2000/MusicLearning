@@ -24,6 +24,7 @@ class allCourse extends React.Component {
         console.log('Page: ', pageNumber);
     }
     onCourseDetail=(class_teacher,id)=>{
+        console.log(typeof class_teacher)
         this.props.receivedCourseDetail(id);
         this.props.receivedCoureReview(id,class_teacher);
         this.props.history.push('/courseDetail')

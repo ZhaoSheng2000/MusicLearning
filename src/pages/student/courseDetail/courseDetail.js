@@ -31,6 +31,7 @@ class CourseDetail extends React.Component {
     };
 
     onTeacherDetail=(id)=>{
+        console.log(typeof id);
         this.props.receivedTheTeacher(id);
         this.props.receivedTeacherCourse(id);
         this.props.history.push('/teacherDetail')

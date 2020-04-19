@@ -11,8 +11,8 @@ import {userInfo,receiveMyCourse} from "../../redux/actions";
 import './personal.less'
 import Cookies from "js-cookie";
 import axios from 'axios'
-import "../../../mock/feedbackMock";
-import "../../../mock/addEvaluationMock";
+// import "../../../mock/feedbackMock";
+// import "../../../mock/addEvaluationMock";
 
 const { TextArea } = Input;
 const {Title, Paragraph, Text} = Typography;
@@ -61,8 +61,8 @@ class Personal extends React.Component {
         }
         else {
             axios.post('/stu/addFeedback', {
-                course_id:String(course_id),
-                tea_id:String(tea_id),
+                course_id:course_id,
+                tea_id:tea_id,
                 stu_id:userId,
                 feedback:value
             }).then(r=>{
