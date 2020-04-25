@@ -1,17 +1,25 @@
 import React from 'react'
 import {Card, Col, Row,Avatar, Statistic} from "antd";
+import Cookies from 'js-cookie';
+import {reqAllStudent} from "../../../api";
 
 const { Meta } = Card;
 
 export default class StudentInform extends React.Component {
 
     state = {
-        student:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+        student:[]
     };
-
-    onDetail=()=>{
-        this.props.history.push('/teacherPage/studentDetail')
+    componentDidMount() {
+        const id = Cookies.get("userId");
+        reqAllStudent(id).then(r =>{
+            this.setState({student:r.data.data});
+        })
     }
+
+    // onDetail=()=>{
+    //     this.props.history.push('/teacherPage/studentDetail')
+    // }
 
     render() {
         return (
@@ -21,20 +29,14 @@ export default class StudentInform extends React.Component {
                         this.state.student.map((name,index)=>{
                             return(
                                 <Col span={6} key={index}>
-                                    <Card
-                                        onClick={this.onDetail}
-                                        hoverable
-                                    >
+                                    <Card>
                                         <Meta
-                                            avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                            title={`学生${name}`}
+                                            avatar={<Avatar src={name.picture} />}
+                                            title={`学生${name.username}`}
                                             description={
                                                 <Row gutter={16}>
                                                     <Col span={12}>
-                                                        <Statistic title="上课次数" value={name} />
-                                                    </Col>
-                                                    <Col span={12}>
-                                                        <Statistic title="出勤率" value={95} suffix="%"  />
+                                                        <Statistic title="上课次数" value={name.checkintimes} />
                                                     </Col>
                                                 </Row>
                                             }

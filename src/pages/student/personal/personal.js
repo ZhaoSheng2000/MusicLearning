@@ -60,7 +60,7 @@ class Personal extends React.Component {
             });
         }
         else {
-            axios.post('/stu/addFeedback', {
+            axios.post('http://localhost:8080/stu/addFeedback', {
                 course_id:course_id,
                 tea_id:tea_id,
                 stu_id:userId,
@@ -144,7 +144,7 @@ class Personal extends React.Component {
                         <Col span={4}>
                             <div style={{textAlign: 'center', paddingTop: 10}}>
                                 <Avatar size={64}
-                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
+                                        src={userinfo.picture}/>
                             </div>
                         </Col>
                         <Col span={10}>
@@ -179,7 +179,9 @@ class Personal extends React.Component {
                                         <Card  key={index}>
                                             <Row gutter={16}>
                                                 <Col span={8}>
-                                                    <img alt='course' src={name.img}/>
+                                                    <div style={{whith:510,height:280}}>
+                                                        <img alt='course' src={name.img}/>
+                                                    </div>
                                                 </Col>
                                                 <Col span={8}>
                                                     <Title level={4}>{name.course_content}课程</Title>

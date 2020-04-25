@@ -1,6 +1,7 @@
 import React from 'react'
 import {Card, Col, Row} from "antd";
 import { Line } from '@antv/g2plot';
+import {reqchartMap} from "../../../../api";
 
 
 const { Meta } = Card;
@@ -8,26 +9,20 @@ const { Meta } = Card;
 export default class Classes extends React.Component {
 
     componentDidMount() {
-        const data = [
-            { year: '第一周', value: 30 },
-            { year: '第二周', value: 41 },
-            { year: '第三周', value: 33 },
-            { year: '第四周', value: 35 },
-            { year: '第五周', value: 40 },
-            { year: '第六周', value: 36 },
-            { year: '第七周', value: 37 },
-            { year: '第八周', value: 39 },
-            { year: '第九周', value: 33 },
-        ];
+        reqchartMap().then(e =>{
+            const data = e.data.data;
+            const linePlot = new Line('canvas', {
+                data,
+                xField: 'course',
+                yField: 'value',
+            });
 
-        const linePlot = new Line('canvas', {
-            data,
-            xField: 'year',
-            yField: 'value',
+
+            linePlot.render();
         });
 
 
-        linePlot.render();
+
     }
     state = {};
     render() {

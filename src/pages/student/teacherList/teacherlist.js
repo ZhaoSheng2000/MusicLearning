@@ -34,7 +34,7 @@ class teacherList extends React.Component {
         return (
             <div>
                 <div className='myTitle'>
-                    <Title level={3}>分类一</Title>
+                    <Title level={3}>摇滚乐</Title>
                 </div>
                 <Row gutter={[16, 16]}>
                     {
@@ -56,7 +56,7 @@ class teacherList extends React.Component {
                 </Row>
 
                 <div className='myTitle'>
-                    <Title level={3}>分类二</Title>
+                    <Title level={3}>流行乐</Title>
                 </div>
                 <Row gutter={[16, 16]}>
                     {

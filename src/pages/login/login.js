@@ -3,9 +3,7 @@ import {connect} from 'react-redux'
 import {Form, Input, Button, Card, Radio} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import Cookies from 'js-cookie'
-import axios from 'axios'
-import "../../mock/loginMock";
-
+import {reqLogin} from "../../api";
 
 import {userLogin} from "../redux/actions";
 
@@ -16,7 +14,7 @@ class Login extends React.Component {
     onFinish = (e) => {
         console.log(e);
         this.props.userLogin(e);
-        axios.post('/my/login', {
+        reqLogin({
             username: e.username,
             password: e.password
         }).then(r => {

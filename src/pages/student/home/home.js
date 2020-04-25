@@ -59,18 +59,15 @@ class Home extends React.Component {
                 <Row gutter={12}>
                     <Col span={20}>
                         <Carousel autoplay>
-                            <div>
-                                <h3>1</h3>
-                            </div>
-                            <div>
-                                <h3>2</h3>
-                            </div>
-                            <div>
-                                <h3>3</h3>
-                            </div>
-                            <div>
-                                <h3>4</h3>
-                            </div>
+                            {
+                                news.map((name, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <img alt="example" src={name.picture}/>
+                                        </div>
+                                    )
+                                })
+                            }
                         </Carousel>
                     </Col>
                     <Col span={4}>

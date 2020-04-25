@@ -132,7 +132,7 @@ class DiscussDetail extends React.Component {
                         <Card>
                             <Row gutter={16}>
                                 <Col span={8}>
-                                    <img alt='course' src="https://s1.ax1x.com/2020/03/31/GMW6IS.jpg"/>
+                                    <img  alt='course' src="https://s1.ax1x.com/2020/03/31/GMW6IS.jpg"/>
                                 </Col>
                                 <Col span={16}>
                                     <Title level={4}>{theDiscuss.content}</Title>

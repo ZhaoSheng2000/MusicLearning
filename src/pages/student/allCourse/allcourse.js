@@ -24,7 +24,7 @@ class allCourse extends React.Component {
         console.log('Page: ', pageNumber);
     }
     onCourseDetail=(class_teacher,id)=>{
-        console.log(typeof class_teacher)
+        console.log(typeof class_teacher);
         this.props.receivedCourseDetail(id);
         this.props.receivedCoureReview(id,class_teacher);
         this.props.history.push('/courseDetail')
@@ -37,18 +37,15 @@ class allCourse extends React.Component {
         return (
             <div>
                 <Carousel autoplay>
-                    <div>
-                        <h3>1</h3>
-                    </div>
-                    <div>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <h3>3</h3>
-                    </div>
-                    <div>
-                        <h3>4</h3>
-                    </div>
+                    {
+                        allCourse.slice(0,4).map((name,index)=>{
+                            return(
+                                <div key={index}>
+                                    <img  alt="example" src={name.img}/>
+                                </div>
+                            )
+                        })
+                    }
                 </Carousel>
 
                 <div className='myTitle'>
