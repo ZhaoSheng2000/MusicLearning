@@ -75,17 +75,20 @@
 3. 对浏览资讯页面的信息编辑（发布的公告、发布的最新新闻、发布赛事、优秀学生视频展播等）
 
 ## 部分页面预览
-![image-20200508122132984](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxbpkud0j30ho09mdn1.jpg)
+图片加载不出来可以看这里[图片文档](https://nizhenkeai.xyz/2020/04/21/musiclearning-xiang-mu-kai-fa/)
+
+
+![登录](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxbpkud0j30ho09mdn1.jpg)
 登录
-![image-20200508122237244](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxcsmcxvj30i009o0xw.jpg)
+![学生端主页](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxcsmcxvj30i009o0xw.jpg)
 学生端主页
-![image-20200508122305810](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxdb62lpj30hu09rmzl.jpg)
+![教师详情](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxdb62lpj30hu09rmzl.jpg)
 教师详情
-![image-20200508122333106](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxdr9hnjj30pj0duwhx.jpg)
+![教师后台上课记录](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxdr9hnjj30pj0duwhx.jpg)
 教师后台上课记录
-![image-20200508122358110](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxe8bmi6j30po0dvtag.jpg)
+![管理员后台](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxe8bmi6j30po0dvtag.jpg)
 管理员后台
-![image-20200508122421598](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxeln1rwj30pn0dwq47.jpg)
+![统计信息](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxeln1rwj30pn0dwq47.jpg)
 统计信息
 
 ## 项目部署
