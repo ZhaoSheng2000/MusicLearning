@@ -46,7 +46,6 @@ export default class StudentInform extends React.Component {
                             )
                         })
                     }
-                 ]
                 </Row>
             </div>
         )

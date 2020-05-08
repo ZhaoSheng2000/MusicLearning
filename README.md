@@ -75,18 +75,19 @@
 3. 对浏览资讯页面的信息编辑（发布的公告、发布的最新新闻、发布赛事、优秀学生视频展播等）
 
 ## 部分页面预览
-![](.README_images/34a513f0.png)
+![image-20200508122132984](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxbpkud0j30ho09mdn1.jpg)
 登录
-![](.README_images/226ad741.png)
+![image-20200508122237244](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxcsmcxvj30i009o0xw.jpg)
 学生端主页
-![](.README_images/f943309f.png)
+![image-20200508122305810](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxdb62lpj30hu09rmzl.jpg)
 教师详情
-![](.README_images/34b08b99.png)
+![image-20200508122333106](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxdr9hnjj30pj0duwhx.jpg)
 教师后台上课记录
-![](.README_images/f8a65c33.png)
+![image-20200508122358110](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxe8bmi6j30po0dvtag.jpg)
 管理员后台
-![](.README_images/7c1acec7.png)
+![image-20200508122421598](https://tva1.sinaimg.cn/large/007S8ZIlly1gekxeln1rwj30pn0dwq47.jpg)
 统计信息
+
 ## 项目部署
 运行环境要求： node,yarn
 
