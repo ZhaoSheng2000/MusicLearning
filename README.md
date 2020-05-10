@@ -97,7 +97,7 @@
 在开始之前，你可能需要安装，[nodejs](https://nodejs.org/en/)和[yarn](https://yarnpkg.com/zh-Hans/docs/install)
 1. 克隆代码到本地
 `git clone https://github.com/ZhaoSheng2000/MusicLearning.git`
-2. 执行 `yarn`下载依赖，如果在过程中出现网络问题，请尝试配置代理或使用其他 npm registry。
+2. 执行 `yarn install`下载依赖，如果在过程中出现网络问题，请尝试配置代理或使用其他 npm registry。
 3. 执行 `yarn start` 运行项目,运行成功后浏览器会访问 http://localhost:3000/ 
 ## LICENSE
 Apache License 2.0
