@@ -16,6 +16,7 @@ class Home extends React.Component {
     state = {
         tuijian: [1, 2, 3, 4],
         yinyue: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        userinfo:''
     };
 
     componentDidMount() {
@@ -25,7 +26,8 @@ class Home extends React.Component {
             this.props.history.push('/login')
         }
         reqUserInfo(id).then(res =>{
-            console.log(res.data.data)
+            console.log(res.data.data[0])
+            this.setState({userinfo:res.data.data[0]})
         })
         this.props.receiveNew();
         const userId = Cookies.get("userId");
@@ -54,8 +56,8 @@ class Home extends React.Component {
     }
 
     render() {
+        const {userinfo} = this.state
         const {news} = this.props.news;
-        const {userinfo} = this.props.userinfo;
         const myCourse = this.props.myCourse.mycourse;
         const {allCourse} = this.props.allCourse;
         const {allDiscuss} = this.props.allDiscuss;
