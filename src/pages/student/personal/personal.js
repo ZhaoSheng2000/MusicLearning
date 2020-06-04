@@ -11,8 +11,7 @@ import {userInfo,receiveMyCourse} from "../../redux/actions";
 import './personal.less'
 import Cookies from "js-cookie";
 import axios from 'axios'
-// import "../../../mock/feedbackMock";
-// import "../../../mock/addEvaluationMock";
+import {reqMyCourse} from "../../../api"
 
 const { TextArea } = Input;
 const {Title, Paragraph, Text} = Typography;
@@ -21,7 +20,7 @@ const {Title, Paragraph, Text} = Typography;
 class Personal extends React.Component {
 
     state = {
-        course:[1,2,3,4,5,6],
+        mycourse: [],
         visible: false,
         confirmLoading: false,
         confirmLoading2:false,
@@ -33,7 +32,10 @@ class Personal extends React.Component {
     componentDidMount() {
         const userId = Cookies.get("userId");
         this.props.userInfo(userId);
-        this.props.receiveMyCourse(userId);
+        reqMyCourse(userId).then(res =>{
+            const mycourse = res.data.data
+            this.setState({mycourse})
+        })
     }
     showModal = () => {
         this.setState({
@@ -60,7 +62,7 @@ class Personal extends React.Component {
             });
         }
         else {
-            axios.post('http://localhost:8080/stu/addFeedback', {
+            axios.post('/stu/addFeedback', {
                 course_id:course_id,
                 tea_id:tea_id,
                 stu_id:userId,
@@ -92,13 +94,14 @@ class Personal extends React.Component {
             });
         }
         else {
+            console.log(value2)
             axios.post('/stu/addEvaluation', {
-                course_id:String(course_id),
-                tea_id:String(tea_id),
+                course_id:course_id,
+                tea_id:tea_id,
                 stu_id:userId,
-                addEvaluation:value2
+                evaluation:value2
             }).then(r=>{
-                if (r.data.error_code===3007){
+                if (r.data.error_code===3009){
                     this.setState({
                         visible2: false,
                         confirmLoading2: false,
@@ -135,8 +138,7 @@ class Personal extends React.Component {
         const { visible, confirmLoading,value ,confirmLoading2,visible2,value2} = this.state;
 
         const {userinfo} = this.props.userinfo;
-        const myCourse = this.props.myCourse.mycourse;
-
+        const myCourse = this.state.mycourse
         return (
             <div>
                 <div className='top-bg'>
@@ -179,15 +181,15 @@ class Personal extends React.Component {
                                         <Card  key={index}>
                                             <Row gutter={16}>
                                                 <Col span={8}>
-                                                    <div style={{whith:510,height:280}}>
+                                                    <div style={{whith:510}}>
                                                         <img alt='course' src={name.img}/>
                                                     </div>
                                                 </Col>
                                                 <Col span={8}>
-                                                    <Title level={4}>{name.course_content}课程</Title>
+                                                    <Title level={4}>{name.course_title}课程</Title>
                                                     <br/>
                                                     <Paragraph>
-                                                        {name.teausername}老师
+                                                        {name.teausername}
                                                     </Paragraph>
                                                 </Col>
                                                 <Col span={8}>
@@ -199,7 +201,7 @@ class Personal extends React.Component {
                                                     <br/>
                                                     <br/>
                                                     <div>
-                                                        <Button type={"primary"} onClick={this.showModal}>提问老师</Button>&nbsp;
+                                                        <Button type={"primary"} onClick={this.showModal}>课程反馈</Button>&nbsp;
                                                         <Button type={"primary"} onClick={this.showModal2}>评价课程</Button>
                                                         <Modal
                                                             title="提问老师"

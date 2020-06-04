@@ -1,49 +1,58 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Col, Row, Typography, Breadcrumb, Button, Tabs, Card, Avatar,List,message} from "antd";
+import {Col, Row, Typography, Breadcrumb, Button, Tabs, Card, Avatar, List, message, Comment} from "antd";
 
 import {
     RadarChartOutlined,
     InfoCircleOutlined
 } from '@ant-design/icons';
 
-import {receivedTheTeacher,receivedTeacherCourse} from "../../redux/actions";
 import Cookies from 'js-cookie';
 
-import {reqaddCourse} from "../../../api";
+import {reqaddCourse, reqcoureDetail, reqcourseReview} from "../../../api";
 
 const {Title, Text,Paragraph} = Typography;
 const {TabPane} = Tabs;
 
 
-class CourseDetail extends React.Component {
+export default class CourseDetail extends React.Component {
 
-    state = {
+    state = {courseDetail:'',courseReview:[]};
 
-    };
+    componentDidMount() {
+        const {id} = this.props.location.state
+        reqcoureDetail(id).then(res =>{
+            const courseDetail = res.data.data[0]
+            reqcourseReview(res.data.data[0].id,res.data.data[0].tea_id).then(r =>{
+                const courseReview = r.data.data
+                this.setState({courseReview})
+                console.log(courseReview)
+            })
+            this.setState({courseDetail})
+        })
+    }
+
+
     onConfirm=(id,class_teacher)=>{
         const stu_id = Cookies.get("userId");
         reqaddCourse(id,class_teacher,stu_id).then(r=>{
             if(r.data.error_code===3005){
                 message.success('参加课程成功！');
+            }else if (r.data.error_code===3116){
+                message.error('您已参加过改课程，请勿重复参加')
             }
         })
     };
 
     onTeacherDetail=(id)=>{
-        console.log(typeof id);
-        this.props.receivedTheTeacher(id);
-        this.props.receivedTeacherCourse(id);
-        this.props.history.push('/teacherDetail')
+        console.log(id)
+        this.props.history.push({pathname:'/teacherDetail',state:{id:id}})
 
 }
 
 
     render() {
-        const {courseDetail} = this.props.courseDetail;
-        const {courseReview} = this.props.courseReview;
-        console.log(courseDetail);
-
+        const {courseDetail,courseReview} = this.state;
+        console.log(courseDetail)
         return (
             <div>
                 <div style={{paddingLeft: 30, backgroundColor: "white", height: 400}}>
@@ -55,7 +64,7 @@ class CourseDetail extends React.Component {
                     </div>
                     <Row gutter={[16, 16]}>
                         <Col span={11}>
-                            <img alt="course" src="https://s1.ax1x.com/2020/04/02/GYYhPs.jpg"/>
+                            <img alt="course" src={courseDetail.img} style={{weith:510,height:290}}/>
                         </Col>
                         <Col span={12}>
                             <Title level={3}>{courseDetail.course_title}</Title>
@@ -134,23 +143,26 @@ class CourseDetail extends React.Component {
                                             itemLayout="horizontal"
                                             dataSource={courseReview}
                                             renderItem={item => (
-                                                <List.Item>
-                                                    <List.Item.Meta
-                                                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                                        description={item.evaluation}
+                                                <li>
+                                                    <Comment
+                                                        author={item.stuname}
+                                                        avatar={item.picture}
+                                                        content={item.evaluation}
+                                                        datetime={item.intime}
                                                     />
-                                                </List.Item>
+                                                </li>
                                             )}
                                         />
+
                                     </TabPane>
                                 </Tabs>
                             </Card>
                         </Col>
                         <Col span={6}>
                             <Card title="授课老师" bordered={false}>
-                                <a onClick={()=>this.onTeacherDetail(courseDetail.class_teacher)}>
+                                <a onClick={()=>this.onTeacherDetail(courseDetail.tea_id)}>
                                     <Avatar size={64}
-                                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
+                                            src={courseDetail.picture}/>
                                     {courseDetail.teausername}
                                 </a>
                             </Card>
@@ -161,6 +173,3 @@ class CourseDetail extends React.Component {
         )
     }
 }
-export default connect(
-    state=>({courseDetail: state.courseDetail,courseReview: state.courseReview}),{receivedTheTeacher,receivedTeacherCourse}
-)(CourseDetail)

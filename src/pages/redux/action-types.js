@@ -5,7 +5,6 @@ export const USER_INFO = 'user_info';//用户信息
 export const MY_COURSE = 'my_course';//我的课程
 export const ALL_COURSE = 'all_course';//查看所有课程
 export const ALL_DISCUSS = 'all_discuss';//所有讨论
-export const THE_NEWS = 'the_news';//某一新闻资讯
 export const THE_DISCUSS = 'the_discuss';//某一讨论
 export const ALL_TEACHER = 'all_teacher';//所有老师
 export const THE_TEACHER = 'the_teacher';//某一老师

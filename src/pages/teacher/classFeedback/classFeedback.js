@@ -1,33 +1,50 @@
 import React from 'react'
-import {connect} from 'react-redux'
 
-import {Card, Col, Row, Typography} from "antd";
+import {Card, Col, Comment, List, Row} from "antd";
+import {reqFeedback} from "../../../api"
 
-const { Paragraph } = Typography;
 
- class ClassFeedback extends React.Component {
+export default class ClassFeedback extends React.Component {
 
-    state = {question:[1,2,3,4,5,6,7,8,9,10]};
+    state = {
+        question: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        feedback: []
+    };
+
+    componentDidMount() {
+        const {id, tea_id} = this.props.location.state
+        reqFeedback(id, tea_id).then(res => {
+            this.setState({feedback: res.data.data})
+        })
+    }
 
     render() {
-        const {feedBack} = this.props.feedBack
+        const {feedback} = this.state
+        console.log(feedback)
         return (
             <div>
-                <Row gutter={[12,12]}>
-                    {
-                        feedBack.map((feedBack,index)=>{
-                            return(
-                                <Col span={22} key={index}>
-                                    <Card
-                                        title={feedBack.feedback}
-                                        size={"small"}
-                                    >
-                                        {feedBack.feedback }
-                                    </Card>
-                                </Col>
-                            )
-                        })
-                    }
+                <Row gutter={[12, 12]}>
+                    <Col span={22}>
+                        <Card>
+                            <List
+                                header={`${feedback.length} 反馈`}
+                                itemLayout="horizontal"
+                                dataSource={feedback}
+                                renderItem={item => (
+                                    <li>
+                                        <Comment
+                                            author={item.nickname}
+                                            avatar={item.picture}
+                                            content={item.feedback}
+                                            datetime={item.intime}
+                                        />
+                                    </li>
+                                )}
+                            />
+                        </Card>
+
+                    </Col>
+
 
                 </Row>
 
@@ -35,6 +52,3 @@ const { Paragraph } = Typography;
         )
     }
 }
-export default connect(
-    state =>({feedBack: state.feedBack})
-)(ClassFeedback)

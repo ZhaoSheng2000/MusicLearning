@@ -12,7 +12,6 @@ import {
     MY_COURSE,
     ALL_COURSE,
     ALL_DISCUSS,
-    THE_NEWS,
     THE_DISCUSS,
     ALL_TEACHER,
     THE_TEACHER,
@@ -100,16 +99,6 @@ function allDiscuss(state = initAlldiscuss, action) {
     }
 }
 
-//the_news
-const initTheNews = {theNews: ''};
-
-function theNews(state = initTheNews, action) {
-    if (action.type === THE_NEWS) {
-        return {...state, theNews: action.data[0]}
-    } else {
-        return state
-    }
-}
 
 //the_discuss
 const initThediscuss = {theDiscuss: ''};
@@ -191,12 +180,12 @@ function stuList(state = initstuList, action) {
 }
 
 //feedback
-const initfeedBack = {feedBack: []};
+const initfeedBack = {feedback: []};
 
 //
 function feedBack(state = initfeedBack, action) {
     if (action.type === FEEDBACK) {
-        return{...state,feedBack: action.data}
+        return{...state,feedback: action.data}
     }else {
         return state
     }
@@ -205,6 +194,6 @@ function feedBack(state = initfeedBack, action) {
 
 export default combineReducers({
     user, news, userInfo, myCourse,
-    allCourse, allDiscuss, theNews, theDiscuss,
+    allCourse, allDiscuss, theDiscuss,
     allTeacher, theTeacher, teacherCourse, courseDetail, courseReview, stuList,feedBack
 })

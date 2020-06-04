@@ -1,14 +1,25 @@
 import React from 'react'
 import {Card,Typography, Breadcrumb} from "antd";
+import {reqTheNews} from "../../../../api"
 
 const { Paragraph,Text } = Typography;
 
 
 export default class NoticeDetail extends React.Component {
 
-    state = {};
+    state = {news:''};
+    componentDidMount() {
+        const {id} = this.props.location.state
+        console.log(id)
+        reqTheNews(id).then(res =>{
+            const news = res.data.data[0]
+            this.setState({news:news})
+        })
+    }
 
     render() {
+        const {news} = this.state
+        console.log(news)
         return (
             <div>
                 <Breadcrumb style={{ margin: '12px 0' }}>
@@ -16,10 +27,10 @@ export default class NoticeDetail extends React.Component {
                     <Breadcrumb.Item>通知详情</Breadcrumb.Item>
                 </Breadcrumb>
                 <Card
-                    title={'上课通知'}
+                    title={news.title}
                 >
-                    <Text type={"warning"}>Admin</Text> &nbsp;&nbsp; <Text type={'secondary'}>2020-02-10 09:58</Text>
-                    <Paragraph style={{paddingTop:20}}>通知内容通知内容通知内容通知内容通知内容通知内容通知内容</Paragraph>
+                    <Paragraph><img src={news.picture}/></Paragraph>
+                    <Paragraph>{news.content}</Paragraph>
                 </Card>
             </div>
         )

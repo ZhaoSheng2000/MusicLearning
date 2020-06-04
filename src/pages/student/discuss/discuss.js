@@ -24,7 +24,7 @@ class Discuss extends React.Component {
     onDetail=(id)=>{
         this.props.receiveTheDiscuss(id);
         console.log(typeof id);
-        this.props.history.push('/discussDetail');
+        this.props.history.push({pathname:'/discussDetail',state:{id:id}});
     };
 
     render() {
@@ -58,9 +58,6 @@ class Discuss extends React.Component {
                     </Col>
                 </Row>
 
-                <div style={{textAlign:"center"}}>
-                    <Pagination  defaultPageSize={24} defaultCurrent={1} total={500} onChange={this.onChange}/>
-                </div>
             </div>
         )
     }

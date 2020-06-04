@@ -23,8 +23,7 @@ const { TextArea } = Input;
     }
 
      onCommentDetail=(id,teacher)=>{
-        this.props.receivedCoureReview(id,teacher);
-        this.props.history.push("/teacherPage/commentDetail")
+        this.props.history.push({pathname:"/teacherPage/commentDetail",state:{id:id,teacher:teacher}})
     };
      showModal = (course) => {
          this.setState({
@@ -74,6 +73,7 @@ const { TextArea } = Input;
     render() {
         const{teacherCourse} = this.props.teacherCourse;
         const { value } = this.state;
+        console.log(teacherCourse)
         return (
             <div>
                 <Title level={3}>我的课程</Title>
@@ -102,7 +102,7 @@ const { TextArea } = Input;
                                                 <br/>
                                                 <br/>
                                                 <div>
-                                                    <Button  type={"primary"} onClick={()=>this.onCommentDetail(name.id,name.class_teacher)}>查看评价</Button>
+                                                    <Button  type={"primary"} onClick={()=>this.onCommentDetail(name.id,name.tea_id)}>查看评价</Button>
                                                     &nbsp;&nbsp; <Button  type={"primary"} onClick={()=>this.showModal(name.id,)}>新建讨论</Button>
                                                     <Modal
                                                         title="新建讨论"

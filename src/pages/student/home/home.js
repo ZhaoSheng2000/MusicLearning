@@ -5,8 +5,9 @@ import {UserOutlined} from '@ant-design/icons';
 import Cookies from "js-cookie"
 
 
-import {receiveNew, userInfo, receiveMyCourse, receiveAllCourse,receiveAllDiscuss,receiveTheNews} from "../../redux/actions";
+import {receiveNew, userInfo, receiveMyCourse, receiveAllCourse,receiveAllDiscuss} from "../../redux/actions";
 import './home.less'
+import {reqUserInfo} from "../../../api"
 
 const {Title} = Typography;
 const {Meta} = Card;
@@ -23,6 +24,9 @@ class Home extends React.Component {
             message.error('请先登录！');
             this.props.history.push('/login')
         }
+        reqUserInfo(id).then(res =>{
+            console.log(res.data.data)
+        })
         this.props.receiveNew();
         const userId = Cookies.get("userId");
         this.props.userInfo(userId);
@@ -32,19 +36,21 @@ class Home extends React.Component {
 
     }
 
-    onCourseDetail = () => {
-        this.props.history.push('/courseDetail')
+    onCourseDetail = (id) => {
+        this.props.history.push({pathname:'/courseDetail',state:{id:id}})
     };
+
     onInformationDetail = (id) => {
-        console.log(typeof id)
-        this.props.receiveTheNews(id);
-        this.props.history.push('/information')
+        this.props.history.push({pathname:`/information`,state:{id:id}})
     }
-    onQuestion = () => {
-        this.props.history.push(`/discussDetail`)
+    onQuestion = (id) => {
+        this.props.history.push({pathname:`/discussDetail`,state:{id:id}})
     }
     onPersonal = () => {
         this.props.history.push('/personal')
+    }
+    onpicDetail =(id)=>{
+        this.props.history.push({pathname:`/information`,state:{id:id}})
     }
 
     render() {
@@ -63,7 +69,7 @@ class Home extends React.Component {
                                 news.map((name, index) => {
                                     return (
                                         <div key={index}>
-                                            <img alt="example" src={name.picture}/>
+                                            <img alt="example" src={name.picture} style={{height:380}} onClick={()=>this.onpicDetail(name.id)}/>
                                         </div>
                                     )
                                 })
@@ -122,12 +128,12 @@ class Home extends React.Component {
                             return (
                                 <Col span={6} key={index}>
                                     <Card
-                                        onClick={this.onCourseDetail}
+                                        onClick={()=>this.onCourseDetail(name.id)}
                                         hoverable
                                         style={{width: 300}}
                                         cover={<img alt="example" src={name.img}/>}
                                     >
-                                        <Meta title={name.course_title} description={name.course_content}/>
+                                        <Meta title={name.course_title} description={`${name.course_content.slice(0,50)}...`}/>
                                     </Card>
                                 </Col>
                             )
@@ -150,7 +156,7 @@ class Home extends React.Component {
                                 return(
                                     <Col span={8} key={index}>
                                         <div className='discussCard'>
-                                            <Card title={`来自${name.coursename} ${name.teausername}老师`} hoverable style={{height: 200}} onClick={this.onQuestion}>
+                                            <Card title={`来自${name.coursename} ${name.teausername}`} hoverable style={{height: 200}} onClick={()=>this.onQuestion(name.id)}>
                                                 <Title level={4}>{name.problem}</Title>
                                                 <p style={{position: "absolute", bottom: 0}}>已有234人参与讨论</p>
                                             </Card>
@@ -171,11 +177,11 @@ class Home extends React.Component {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
-                                        onClick={this.onCourseDetail}
+                                        onClick={() =>this.onCourseDetail(name.id)}
                                         hoverable
                                         cover={<img alt="example" src={name.img}/>}
                                     >
-                                        <Meta title={name.course_title} description={name.course_content}/>
+                                        <Meta title={name.course_title} description={`${name.course_content.slice(0,45)}...`}/>
                                     </Card>
                                 </Col>
                             )
@@ -192,11 +198,11 @@ class Home extends React.Component {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
-                                        onClick={this.onCourseDetail}
+                                        onClick={() =>this.onCourseDetail(name.id)}
                                         hoverable
                                         cover={<img alt="example" src={name.img}/>}
                                     >
-                                        <Meta title={name.course_title} description={name.course_content}/>
+                                        <Meta title={name.course_title} description={`${name.course_content.slice(0,45)}...`}/>
                                     </Card>
                                 </Col>
                             )
@@ -205,7 +211,7 @@ class Home extends React.Component {
                 </Row>
 
                 <div className='myTitle'>
-                    <Title level={3}>写作</Title>
+                    <Title level={3}>摇滚</Title>
                 </div>
                 <Row gutter={[16, 16]}>
                     {
@@ -213,11 +219,11 @@ class Home extends React.Component {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
-                                        onClick={this.onCourseDetail}
+                                        onClick={() =>this.onCourseDetail(name.id)}
                                         hoverable
                                         cover={<img alt="example" src={name.img}/>}
                                     >
-                                        <Meta title={name.course_title} description={name.course_content}/>
+                                        <Meta title={name.course_title} description={`${name.course_content.slice(0,45)}...`}/>
                                     </Card>
                                 </Col>
                             )
@@ -226,7 +232,7 @@ class Home extends React.Component {
                 </Row>
 
                 <div className='myTitle'>
-                    <Title level={3}>计算机</Title>
+                    <Title level={3}>古典</Title>
                 </div>
                 <Row gutter={[16, 16]}>
                     {
@@ -234,11 +240,11 @@ class Home extends React.Component {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
-                                        onClick={this.onCourseDetail}
+                                        onClick={() =>this.onCourseDetail(name.id)}
                                         hoverable
                                         cover={<img alt="example" src={name.img}/>}
                                     >
-                                        <Meta title={name.course_title} description={name.course_content}/>
+                                        <Meta title={name.course_title} description={`${name.course_content.slice(0,45)}...`}/>
                                     </Card>
                                 </Col>
                             )
@@ -306,7 +312,7 @@ export default connect(
         myCourse: state.myCourse,
         allCourse:state.allCourse,
         allDiscuss:state.allDiscuss
-    }), {receiveNew, userInfo, receiveMyCourse, receiveAllCourse,receiveAllDiscuss,receiveTheNews})(Home);
+    }), {receiveNew, userInfo, receiveMyCourse, receiveAllCourse,receiveAllDiscuss})(Home);
 
 
 

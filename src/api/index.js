@@ -19,7 +19,7 @@ import axios from 'axios'
 // import  "../mock/feedBackMck";
 // import "../mock/newDiscussMock";
 // import "../mock/noticeMock";
-const baseUrl = "http://localhost:8080";
+const baseUrl = "";
 
 //登录接口
 export const reqLogin = ({username, password}) => axios.post(baseUrl+'/my/login', {
@@ -43,11 +43,12 @@ export const reqMyCourse = (id) => axios.post(baseUrl+'/stu/selectAllCourse', {s
 export const reqAllDiscuss = ()=> axios.get(baseUrl+'/disc/select');
 
 //theNews
-export const reqTheNews = (id) =>axios.post(baseUrl+'/notice/getContent',{id});//正确
+export const reqTheNews = (id) =>axios.post(baseUrl+'/notice/getContent',{id});
 
 //the_discuss
 export const reqTheDiscuss =(dis_id) =>axios.post(baseUrl+'/disc/getDisReplyByID',{dis_id});//正确
-
+//the_discuss_reback
+export const reqdisscussReback = (dis_id,stu_id,content) =>axios.post('/disc/addDisRespsitory',{dis_id,stu_id,content})
 //all_teacher
 export const reqAllTeacher = ()=>axios.get(baseUrl+'/stu/getTeaList');
 
@@ -58,7 +59,7 @@ export const reqTheTeacher = (id) =>axios.post(baseUrl+'/stu/getTeaCon',{id}); /
 export const reqteacherCourse = (tea_id) =>axios.post(baseUrl+'/stu/getTeaCourse',{tea_id});//正确
 
 //course_detail
-export const reqcoureDetail = (id) =>axios.post(baseUrl+'/stu/getCourseById',{id});//正确
+export const reqcoureDetail = (id) =>axios.post(baseUrl+'/stu/getCourseById',{id});
 
 //course_review
 export const reqcourseReview = (course_id,tea_id)=>axios.post(baseUrl+'/tea/stuEvaluation',{course_id,tea_id});//zq

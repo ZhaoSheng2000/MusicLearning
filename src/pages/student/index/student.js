@@ -1,6 +1,6 @@
 import React from 'react'
 import {Layout, Menu,Input} from 'antd';
-import {Route, Switch} from "react-router-dom";
+import {Link, Route, Switch} from "react-router-dom";
 import './student.less'
 import Cookies from 'js-cookie'
 import {
@@ -50,24 +50,15 @@ export default class student extends React.Component {
                             mode="horizontal"
                             defaultSelectedKeys={['0']}
                         >
-                            <Menu.Item key="0"><a href={'/#/'}><HomeOutlined/>首页</a></Menu.Item>
-                            <Menu.Item key="1"> <a href={'/#/allcourse'}><BookOutlined />课程</a></Menu.Item>
-                            <Menu.Item key="2"> <a href={'/#/teacher'}><TeamOutlined />老师</a></Menu.Item>
-                            <Menu.Item key="3"> <a href={'/#/discuss'}><BulbOutlined />精彩讨论</a></Menu.Item>
-                            <SubMenu
-                                title={
-                                <Search
-                                    style={{paddingTop:15,paddingLeft:30}}
-                                    placeholder="搜索课程或老师"
-                                    enterButton="搜索"
-                                    onSearch={value => console.log(value)}
-                                />
-                            }/>
+                            <Menu.Item key="0"><Link to={'/'}><HomeOutlined/>首页</Link></Menu.Item>
+                            <Menu.Item key="1"> <Link to={'/allcourse'}><BookOutlined />课程</Link></Menu.Item>
+                            <Menu.Item key="2"> <Link to={'/teacher'}><TeamOutlined />老师</Link></Menu.Item>
+                            <Menu.Item key="3"> <Link to={'/discuss'}><BulbOutlined />精彩讨论</Link></Menu.Item>
                             <SubMenu title="我的" className="geren">
-                                <Menu.Item> <a href={'/#/changeuser'}><UserOutlined/>我的资料</a> </Menu.Item>
-                                <Menu.Item><a onClick={this.onQuit}><LogoutOutlined/>退出登录</a> </Menu.Item>
+                                <Menu.Item> <Link to={'/changeuser'}><UserOutlined/>我的资料</Link> </Menu.Item>
+                                <Menu.Item><a  onClick={this.onQuit}><LogoutOutlined/>退出登录</a> </Menu.Item>
                             </SubMenu>
-                            <Menu.Item key="4" className="geren"><a href={'/#/personal'}>个人中心</a></Menu.Item>
+                            <Menu.Item key="4" className="geren"><Link to={'/personal'}>个人中心</Link></Menu.Item>
                         </Menu>
                     </Header>
                     <Content className='mycontent'>

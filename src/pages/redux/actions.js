@@ -12,7 +12,6 @@ import {
     USER_INFO,
     MY_COURSE,
     ALL_DISCUSS,
-    THE_NEWS,
     THE_DISCUSS,
     ALL_TEACHER,
     THE_TEACHER,
@@ -30,7 +29,6 @@ import {
     reqMyCourse,
     reqAllCourse,
     reqAllDiscuss,
-    reqTheNews,
     reqTheDiscuss,
     reqAllTeacher,
     reqTheTeacher,
@@ -131,20 +129,6 @@ export const receiveAllDiscuss = () => {
     }
 };
 
-//the_news
-const receiveThenews = (theNews) => ({type: THE_NEWS, data: theNews});
-//
-export const receiveTheNews = (id) => {
-    return async dispatch => {
-        const response = await reqTheNews(id);
-        const result = response.data;
-        if (result.error_code === 4008) {
-            dispatch(errMsg(result))
-        } else {
-            dispatch(receiveThenews(result.data))
-        }
-    }
-};
 
 //the_discuss
 const receiveThediscuss = (theDiscuss) => ({type: THE_DISCUSS, data: theDiscuss});

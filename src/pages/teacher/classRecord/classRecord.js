@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Statistic, Row, Col, Card, Typography, Progress, Button} from 'antd';
 import Cookies from 'js-cookie'
 
-import {receivedTeacherCourse,receivedStuList,receivedFeedback} from "../../redux/actions";
+import {receivedTeacherCourse} from "../../redux/actions";
 
 const {Title, Text} = Typography;
 
@@ -14,14 +14,8 @@ class ClassRecord extends React.Component {
         const id = Cookies.get("userId");
         this.props.receivedTeacherCourse(id);
     }
-
-    onDetail=(id,class_teacher)=>{
-        this.props.receivedStuList(id,class_teacher);
-        this.props.history.push('/teacherPage/recordDetail');
-    }
-    onFeedback=(id,class_teacher)=>{
-        this.props.receivedFeedback(id,class_teacher);
-        this.props.history.push('/teacherPage/classFeedback')
+    onFeedback=(id,tea_id)=>{
+        this.props.history.push({pathname:'/teacherPage/classFeedback',state:{id:id,tea_id:tea_id}})
     }
 
     render() {
@@ -69,9 +63,7 @@ class ClassRecord extends React.Component {
                                                 <br/>
                                                 <br/>
                                                 <div>
-                                                    <Button type={"primary"} onClick={()=>this.onDetail(name.id,name.class_teacher)}>编辑上课记录</Button>
-                                                    &nbsp;&nbsp;
-                                                    <Button type={"primary"} onClick={()=>this.onFeedback(name.id,name.class_teacher)}>查看课下反馈</Button>
+                                                    <Button type={"primary"} onClick={()=>this.onFeedback(name.id,name.tea_id)}>查看课下反馈</Button>
                                                 </div>
                                             </Col>
                                         </Row>
@@ -88,5 +80,5 @@ class ClassRecord extends React.Component {
     }
 }
 export default connect(
-    state=>({teacherCourse:state.teacherCourse}),{receivedTeacherCourse,receivedStuList,receivedFeedback}
+    state=>({teacherCourse:state.teacherCourse}),{receivedTeacherCourse}
 )(ClassRecord)

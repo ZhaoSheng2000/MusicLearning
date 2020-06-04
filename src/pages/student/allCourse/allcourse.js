@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Carousel, Row, Col, Card, Typography, BackTop, Pagination} from 'antd';
+import {Carousel, Row, Col, Card, Typography, BackTop} from 'antd';
 
 import './allcourse.less'
 
-import {receiveAllCourse,receivedCourseDetail,receivedCoureReview} from "../../redux/actions";
+import {receiveAllCourse} from "../../redux/actions";
 
 const {Title} = Typography;
 const {Meta} = Card;
@@ -16,18 +16,11 @@ class allCourse extends React.Component {
     }
 
     state = {
-        course: [1, 2, 3, 4, 5, 6],
-        allcourse: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
     };
 
-    onChange = (pageNumber)=> {
-        console.log('Page: ', pageNumber);
-    }
-    onCourseDetail=(class_teacher,id)=>{
-        console.log(typeof class_teacher);
-        this.props.receivedCourseDetail(id);
-        this.props.receivedCoureReview(id,class_teacher);
-        this.props.history.push('/courseDetail')
+
+    onCourseDetail=(id)=>{
+        this.props.history.push({pathname:'/courseDetail',state:{id:id}})
     }
 
     render() {
@@ -41,7 +34,7 @@ class allCourse extends React.Component {
                         allCourse.slice(0,4).map((name,index)=>{
                             return(
                                 <div key={index}>
-                                    <img  alt="example" src={name.img}/>
+                                    <img  alt="example" src={name.img} style={{height:380}} onClick={() =>{this.onCourseDetail(name.id)}}/>
                                 </div>
                             )
                         })
@@ -57,11 +50,11 @@ class allCourse extends React.Component {
                             return (
                                 <Col span={4} key={index}>
                                     <Card
-                                        onClick={()=>this.onCourseDetail(course.class_teacher,course.id)}
+                                        onClick={()=>this.onCourseDetail(course.id)}
                                         hoverable
                                         cover={<img alt="example" src={course.img}/>}
                                     >
-                                        <Meta title={course.course_title} description={course.course_content}/>
+                                        <Meta title={course.course_title} description={`${course.course_content.slice(0,25)}...`}/>
                                     </Card>
                                 </Col>
                             )
@@ -82,21 +75,18 @@ class allCourse extends React.Component {
                                         hoverable
                                         cover={<img alt="example" src={course.img}/>}
                                     >
-                                        <Meta title={course.course_title} description={course.course_content}/>
+                                        <Meta title={course.course_title} description={`${course.course_content.slice(0,25)}...`}/>
                                     </Card>
                                 </Col>
                             )
                         })
                     }
                 </Row>
-                <div style={{textAlign:"center"}}>
-                    <Pagination  defaultPageSize={24} defaultCurrent={1} total={500} onChange={this.onChange}/>
-                </div>
                 <BackTop/>
             </div>
         )
     }
 }
 export default connect(
-    state =>({allCourse:state.allCourse}),{receiveAllCourse,receivedCourseDetail,receivedCoureReview}
+    state =>({allCourse:state.allCourse}),{receiveAllCourse}
 )(allCourse)

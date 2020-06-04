@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Row, Col, Card, Typography} from 'antd'
 
 import './teacherlist.less'
-import {receivedAllTeacher, receivedTheTeacher, receivedTeacherCourse} from "../../redux/actions";
+import {receivedAllTeacher} from "../../redux/actions";
 
 
 const {Meta} = Card;
@@ -21,10 +21,7 @@ class teacherList extends React.Component {
     }
 
     onTeacherDetail = (id) => {
-        this.props.receivedTheTeacher(id);
-        this.props.receivedTeacherCourse(id);
-
-        this.props.history.push('./teacherDetail');
+        this.props.history.push({pathname:'./teacherDetail',state:{id:id}});
     }
 
     render() {
@@ -47,7 +44,7 @@ class teacherList extends React.Component {
                                         cover={<img alt="teacher"
                                                     src={name.picture}/>}
                                     >
-                                        <Meta title={name.nickname} description={name.remark}/>
+                                        <Meta title={name.nickname} description={`${name.remark.slice(0,30)}...`}/>
                                     </Card>
                                 </Col>
                             )
@@ -69,7 +66,7 @@ class teacherList extends React.Component {
                                         cover={<img alt="teacher"
                                                     src={name.picture}/>}
                                     >
-                                        <Meta title={name.nickname} description={name.remark}/>
+                                        <Meta title={name.nickname} description={`${name.remark.slice(0,30)}...`}/>
                                     </Card>
                                 </Col>
                             )
@@ -85,7 +82,5 @@ class teacherList extends React.Component {
 export default connect(
     state => ({allTeacher: state.allTeacher}), {
         receivedAllTeacher,
-        receivedTheTeacher,
-        receivedTeacherCourse,
     }
 )(teacherList)

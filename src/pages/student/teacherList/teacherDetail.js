@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Avatar, Card, Col, Row, Typography} from 'antd';
 
 import './teacherDetail.less'
+import {reqteacherCourse, reqTheTeacher} from "../../../api"
 
 const {Title} = Typography;
 const {Meta} = Card;
@@ -10,13 +11,25 @@ const {Meta} = Card;
 class TeacherDetail extends React.Component {
 
     state = {
-        course:[1,2,3,4,5,6,7]
+        theTeacher:'',
+        teacherCourse:[]
     };
+    componentDidMount() {
+        const {id} = this.props.location.state
+        reqTheTeacher(id).then(res =>{
+            const theTeacher = res.data.data[0]
+            this.setState({theTeacher})
+        })
+        reqteacherCourse(id).then(r =>{
+            const teacherCourse =  r.data.data
+            console.log(r.data.data)
+            this.setState({teacherCourse})
+        })
+    }
 
     render() {
-        const {theTeacher} = this.props.theTeacher;
-        const {teacherCourse} = this.props.teacherCourse;
-
+        const {theTeacher,teacherCourse} = this.state;
+        console.log(theTeacher)
         return (
             <div>
                 <div className='headerimg'>
@@ -41,7 +54,7 @@ class TeacherDetail extends React.Component {
                                 return(
                                     <Col span={6} key={index}>
                                         <Card
-                                            cover={<img alt="example" src="https://s1.ax1x.com/2020/03/30/GnDSI0.png"/>}
+                                            cover={<img alt="example" src={name.img}/>}
                                         >
                                             <Meta title={name.course_title} description={name.course_content}/>
                                         </Card>

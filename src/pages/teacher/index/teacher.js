@@ -1,6 +1,7 @@
 import React from 'react'
-import {Route, Switch} from "react-router-dom";
-import {Layout, Menu, } from 'antd';
+import {Link, Route, Switch} from "react-router-dom";
+import Cookies from 'js-cookie'
+import {Button, Layout, Menu,} from 'antd';
 import {
     DesktopOutlined,
     PieChartOutlined,
@@ -8,6 +9,7 @@ import {
     EditOutlined,
     NotificationOutlined,
     IdcardOutlined,
+    LogoutOutlined
 } from '@ant-design/icons';
 
 import './teacher.less'
@@ -19,9 +21,7 @@ import Classes from "../courseData/classes/classes";
 import UserInfo from "../userInfo/userInfo";
 import StudentDetail from "../studentInform/studentDetail/studentDetail";
 import ClassRecord from "../classRecord/classRecord";
-import RecordDetail from "../classRecord/recordDetail/recordDetail";
 import ClassFeedback from "../classFeedback/classFeedback";
-import FeedbackDetail from "../classFeedback/feedbackDetail/feedbackDetail";
 import ClassComment from "../classComment/classComment";
 import CommentDetail from "../classComment/commentDetail/commentDetail";
 
@@ -37,7 +37,10 @@ export default class Teacher extends React.Component {
     }
 
     state = {};
-
+    onQuit = ()=>{
+        this.props.history.push('/login')
+        Cookies.remove('userId')
+    }
     render() {
         return (
             <div>
@@ -54,16 +57,16 @@ export default class Teacher extends React.Component {
                         <div className="myLogo"/>
                         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                             <Menu.Item key="1">
-                                <a href={'/#/teacherPage'}>
+                                <Link to={'/teacherPage'}>
                                     <TeamOutlined/>
                                     <span>学生信息</span>
-                                </a>
+                                </Link>
                             </Menu.Item>
                             <Menu.Item key="2">
-                                <a href={'/#/teacherPage/classRecord'}>
+                                <Link to={'/teacherPage/classRecord'}>
                                     <DesktopOutlined/>
                                     <span>上课记录</span>
-                                </a>
+                                </Link>
                             </Menu.Item>
                             <SubMenu
                                 key="sub2"
@@ -75,33 +78,39 @@ export default class Teacher extends React.Component {
                                 }
                             >
                                 <Menu.Item key="4">
-                                    <a href={'/#/teacherPage/courseData'}>上课次数</a>
+                                    <Link to={'/teacherPage/courseData'}>上课次数</Link>
                                 </Menu.Item>
                             </SubMenu>
                             <Menu.Item key="7">
-                                <a href={'/#/teacherPage/classComment'}>
+                                <Link to={'/teacherPage/classComment'}>
                                     <EditOutlined/>
                                     <span>评价讨论</span>
-                                </a>
+                                </Link>
                             </Menu.Item>
                             <Menu.Item key="8">
-                                <a href={'/#/teacherPage/notice'}>
+                                <Link to={'/teacherPage/notice'}>
 
                                         <NotificationOutlined/>
                                         <span>消息通知</span>
-                                </a>
+                                </Link>
                             </Menu.Item>
                             <Menu.Item key="9">
-                                <a href={'/#/teacherPage/userInfo'}>
+                                <Link to={'/teacherPage/userInfo'}>
                                     <IdcardOutlined/>
                                     <span>个人信息</span>
+                                </Link>
+                            </Menu.Item>
+                            <Menu.Item key="10">
+                                <a  onClick={this.onQuit}>
+                                    <LogoutOutlined/>
+                                    <span>退出登录</span>
                                 </a>
                             </Menu.Item>
                         </Menu>
                     </Sider>
                     <Layout className="site-layout" style={{marginLeft: 200}}>
                         <Header className="site-layout-background" style={{padding: 0}}>
-                            <h1 style={{paddingLeft: 25}}>教师后台管理</h1>
+                         <div> <h1 style={{paddingLeft: 25}}>教师后台管理</h1></div>
                         </Header>
                         <Content style={{margin: '16px 16px'}}>
                             <Switch>
@@ -111,9 +120,7 @@ export default class Teacher extends React.Component {
                                 <Route path={'/teacherPage/userInfo'} component={UserInfo}/>
                                 <Route path={'/teacherPage/studentDetail'} component={StudentDetail}/>
                                 <Route path={'/teacherPage/classRecord'} component={ClassRecord}/>
-                                <Route path={'/teacherPage/recordDetail'} component={RecordDetail}/>
                                 <Route path={'/teacherPage/classFeedback'} component={ClassFeedback}/>
-                                <Route path={'/teacherPage/feedbackDetail'} component={FeedbackDetail}/>
                                 <Route path={'/teacherPage/classComment'} component={ClassComment}/>
                                 <Route path={'/teacherPage/commentDetail'} component={CommentDetail}/>
                                 <Route component={StudentInform}/>
