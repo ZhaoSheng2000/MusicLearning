@@ -17,6 +17,9 @@ class ClassRecord extends React.Component {
     onFeedback=(id,tea_id)=>{
         this.props.history.push({pathname:'/teacherPage/classFeedback',state:{id:id,tea_id:tea_id}})
     }
+    onDetail =()=>{
+     this.props.history.push('/teacherpage/recordDetail')
+    }
 
     render() {
         const{teacherCourse} = this.props.teacherCourse;
@@ -63,6 +66,8 @@ class ClassRecord extends React.Component {
                                                 <br/>
                                                 <br/>
                                                 <div>
+                                                    <Button type={"primary"} onClick={this.onDetail}>编辑上课记录</Button>
+                                                    &nbsp;&nbsp;
                                                     <Button type={"primary"} onClick={()=>this.onFeedback(name.id,name.tea_id)}>查看课下反馈</Button>
                                                 </div>
                                             </Col>

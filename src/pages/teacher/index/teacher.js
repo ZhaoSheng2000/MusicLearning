@@ -24,6 +24,7 @@ import ClassRecord from "../classRecord/classRecord";
 import ClassFeedback from "../classFeedback/classFeedback";
 import ClassComment from "../classComment/classComment";
 import CommentDetail from "../classComment/commentDetail/commentDetail";
+import RecordDetail from "../classRecord/recordDetail/recordDetail"
 
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -123,6 +124,7 @@ export default class Teacher extends React.Component {
                                 <Route path={'/teacherPage/classFeedback'} component={ClassFeedback}/>
                                 <Route path={'/teacherPage/classComment'} component={ClassComment}/>
                                 <Route path={'/teacherPage/commentDetail'} component={CommentDetail}/>
+                                <Route path={'/teacherPage/recordDetail'} component={RecordDetail}/>
                                 <Route component={StudentInform}/>
                             </Switch>
                         </Content>
